@@ -27,7 +27,7 @@ import razorpay
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core.mail import send_mail
-from django.utils.datetime_safe import datetime
+import datetime
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.hashers import check_password
 from django.db.models import Avg

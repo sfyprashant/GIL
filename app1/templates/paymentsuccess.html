@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Success</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #cb9a00;
+    }
+
+    p {
+      color: #333;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      background-color: #4CAF50;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Payment Successful!</h1>
+    <p>Thank you for your purchase. Your payment was successful.</p>
+    <p>Transaction ID: <strong>{{ payment_data.razorpay_payment_id }}</strong></p>
+    <p>Amount: <strong><strong><strong>{{ payment_data.amount }}</strong></strong></p>
+        <p>Currency: <strong><strong>{{ payment_data.currency }}</strong></p>
+        <p>Status:<strong> {{ payment_data.status }}</strong></p>
+    
+    <!-- You can customize the button to redirect to another page or perform additional actions -->
+    <a href="/" class="form-button">Continue Shopping</a>
+  </div>
+
+
+</body>
+</html>
+
+{% endblock %}

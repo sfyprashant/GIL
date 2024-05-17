@@ -1,0 +1,568 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>GIL</title>
+    <meta name="description" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <!-- Material Design Iconic Font-V2.2.0 -->
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- Font Awesome Stars-->
+    <link rel="stylesheet" href="{% static 'css/fontawesome-stars.css' %}">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.css' %}">
+    <!-- Nivo Slider CSS -->
+    <link rel="stylesheet" href="{% static 'css/nivo-slider.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Jquery-ui CSS -->
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <!-- Venobox CSS -->
+    <link rel="stylesheet" href="{% static 'css/venobox.css' %}">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- Bootstrap V4.1.3 Fremwork CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- Modernizr js -->
+    <script src="{% static 'js/vendor/modernizr-3.11.2.min.js' %}"></script>
+    <style>
+         .mass {
+            /*background: green;*/
+            border: 2px solid white;
+            color: white;
+            font-weight: bold;
+            border-radius: 6px;
+            padding: 17px;
+        }
+    </style>
+    <style>
+    /* Style for the checkbox */
+    input[type="checkbox"] {
+        background: #eceff8;
+        border: 2px solid #eceff8;
+        height: 30px;
+        box-shadow: none;
+        padding-left: 10px;
+        /* margin-top: 20px; */
+        font-size: 14px;
+        color: #626262;
+        width: auto;
+}
+    }
+
+    input[type="checkbox"] + label {
+        cursor: pointer;
+        position: relative;
+        padding-left: 25px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    input[type="checkbox"] + label:before {
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+        content: "\2713";
+        font-size: 14px;
+        color: #007bff;
+        text-align: center;
+        line-height: 18px;
+    }
+</style>
+<style>
+.loader{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #cb9a00;
+    border-top: 2px solid #ffffff;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0%{
+        transform:rotate(0deg)
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+}
+
+.password-toggle {
+        position: relative;
+    }
+    
+    .toggle-password {
+        position: absolute;
+        right: 3%;
+        top: 70%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+</style>
+</head>
+
+
+<body>
+
+
+    <!-- Begin Body Wrapper -->
+    <div class="body-wrapper">
+        <!-- Begin Header Area -->
+
+
+        <!-- Begin Page Banner Area -->
+        <!--<div class="page-banner login-page-banner">-->
+        <!--    <div class="container">-->
+        <!--        <div class="page-banner-content">-->
+                    <!--<h2>GIL</h2>-->
+                    <!--<ul>-->
+                    <!--    <li><a href="/">Home</a></li>-->
+                    <!--    <li class="active"><a href="{% url 'accounts/login/' %}">Login/Registration</a></li>-->
+                    <!--</ul>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <!-- Page Banner Area End Here -->
+        <!--Login Register Area Strat-->
+        <div class="login-register-area pt-80 pb-95">
+            <div class="container">
+                <div class="row">
+
+
+
+                    <!-- 
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>alert("{{ message }}")</script> {% endif %}
+
+                    {% endfor %}
+
+                    {% endif %} -->
+
+
+
+
+
+                    <!-- {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %} <span class="mass">{{ msg }}</span> {% endif %}
+                    {% endfor %}
+                    {% endif %} -->
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="mass alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <!--Login Form Start-->
+                    <div class="col-md-6 col-sm-6">
+                        <div class="customer-login-register">
+                            <div class="form-login-title">
+                                <h2>Login</h2>
+                            </div>
+                            <div class="login-form">
+                                <form action="{% url 'accounts/login/' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-fild">
+                                        <label>Email address <span class="required">*</span></label>
+                                        <input name="username" value="" type="email" autocomplete="username"  inputmode="email" required>
+                                    </div>
+                                    <div class="form-fild">
+                                        <label>Password <span class="required">*</span></label>
+                                        <input id="passwordInput" name="password" type="password" autocomplete="current-password" required>
+                                       
+                                    </div>  
+                                    <div class="login-submit">
+                                        <label>
+                                            <input class="checkbox" type="checkbox" id="showPasswordCheckbox" onchange="togglePasswordVisibility()">
+                                            <span> Show Password</span>
+                                        </label>
+                                        <button type="submit" class="form-button" style="display: block;">Login</button>
+                                       
+                                    </div>
+                                    <div class="lost-password">
+                                        <a href="{% url 'forgot_password' %}">Forget Your Password ?</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Login Form End-->
+                    <!--Register Form Start-->
+                    <div class="col-md-6 col-sm-6">
+                        <div class="customer-login-register register-pt-0">
+                            <div class="form-register-title">
+                                <h2>Register</h2>
+                            </div>
+                            <div class="register-form">
+                                <form action="{% url 'register' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-field">
+                                        <label>Email address <span class="required">*</span></label>
+                                        <input name="username" value="" inputmode="email"  type="text" required>
+                                    </div>
+                                    <div class="form-field password-toggle">
+                                        <label>Password <span class="required">*</span></label>
+                                        <input name="password" id="new_password" value="" type="password" required>
+                                         <i class="toggle-password far fa-eye-slash" id="toggleNewPassword"></i>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>First Name</label>
+                                        <input name="first_name" value="" type="text" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Last Name</label>
+                                        <input name="last_name" value="" type="text" required>
+                                    </div>
+                                    <!--<div class="form-field">-->
+                                    <!--    <label>Date of Birth</label>-->
+                                    <!--    <input name="dob" value="" type="date" required>-->
+                                    <!--</div>-->
+                                     <div class="form-field">
+                                        <label>Gender</label>
+                                        <select name="gender" required>
+                                            <option value="">--Select Gender--</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Mobile Number</label>
+                                        <input name="mobile_no" id="mobile_no" type="text" maxlength="15" inputmode="numeric" required>
+                                         <!--<input type="hidden" name="phoneNumbercheck" id="phoneNumbercheck" class="form-control" value="false"> -->
+                                         <div id="otpSentFailureMsg" style="display: none; color: red; font-weight: 600;">
+                                            Mobile Number Is already taken !
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="phoneNumbercheck" id="phoneNumbercheck"
+                                        class="form-control" value="false">
+                                        
+                                    <a class="form-button mt-2" id="verifyMobileLink"
+                                        onclick="verifyMobileNumber('send')" class="verify-mobile-link" required>Verify Mobile
+                                        Number</a>
+                                        <div id="loader-BTN" style="display:none ;" class="loader"></div>
+                                        <div id="otpSentSuccessMsg" style="display: none; color: #00ad00; font-weight: 600;">
+                                            OTP Sent Successfully !
+                                        </div>
+                                        <div id="otpInputGroup" style="display: none;">
+                                            <!-- Include your OTP input group here -->
+                                            Somthing went wrong, Please try again!
+                                        </div>
+                                    <!-- Add OTP related fields -->
+                                    <div class="form-field" style="display:none;" id="otpField">
+                                        <div class="form-group" id="otpInputGroup">
+                                            <label for="otp" class="col-sm-3 control-label">Enter OTP* </label>
+
+                                            <input type="text" name="otp" id="otp" placeholder="Enter OTP"  inputmode="numeric" required>
+                                            <a type="button" id="verifyOtpBtn" onclick="verifyOTP()"
+                                                class="form-button mt-2" required>Verify OTP</a>
+                                            <a type="button" id="resendOtpBtn" onclick="verifyMobileNumber('resend')"
+                                                class="form-button mt-2" required>Resend OTP</a>
+                                                
+                                        </div>
+                                    </div>
+
+                                    <div class="form-field">
+                                        <div id="successMsg" style="display: none; color: green;" >
+                                            OTP Verified Successfully!
+                                        </div>
+                                        <div id="failedMessage" style="display: none; color: red;" >
+                                            Invalid OTP. Please try again.
+                                        </div> 
+                                     </div>                                   
+
+
+                                   
+                                    <div class="login-submit">
+                                        <button type="submit" onClick="CheckNUMBER()" class="form-button">Register</button>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Register Form End-->
+                </div>
+            </div>
+        </div>
+        <!--Login Register Area End-->
+
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
+        <!-- Include jQuery library if you want to use it -->
+        <script src="https:///code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <script>
+        let CHECKNUMBER = false;
+            function verifyMobileNumber(check) {
+                CHECKNUMBER = true;
+                showLoader();
+                var checkPhone = document.getElementById('mobile_no').value;
+                var verifyMobileLink = document.getElementById('verifyMobileLink');
+                var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                if (checkPhone === null || checkPhone.trim() === '') {
+                    window.alert("Please Enter Mobile number!");
+                    hideLoader1();
+                }else{
+                    setTimeout(function() {
+                console.log("check",check)
+                // Make an AJAX request to send OTP
+                var mobile_no = checkPhoneNumber(checkPhone)
+                $.ajax({
+                    url: 'verify-mobile',  // Update this URL with the appropriate endpoint in your Django app
+                    type: 'POST',
+
+                    data: {
+                        'mobile_no': mobile_no,
+                        'check': check,
+                        'csrfmiddlewaretoken': csrfToken  // Include the CSRF token in the request
+
+                    },
+                    success: function (data) {
+                        // Handle the response from the server
+                        console.log(data);
+                        if (data.status == 'success') {
+                            console.log(data.status)
+                            document.getElementById('otpSentSuccessMsg').style.display = 'block';
+                            //document.getElementById('otpSentFailureMsg').style.display = 'none';
+                            document.getElementById('verifyMobileLink').style.display = 'none';
+                            otpField = document.getElementById('otpField').style.display = 'block';
+                            console.log(otpField)
+                            hideLoader2();
+                        } else {
+                            // Handle other cases as needed
+                            hideLoader2();
+                            document.getElementById('otpSentSuccessMsg').style.display = 'none'; 
+                            document.getElementById('otpSentFailureMsg').style.display = 'block';
+                        }
+
+                    },
+                    error: function (error) {
+                        window.alert("this mobile number is already taken.");
+                        console.error("Error:", error);
+                        hideLoader2();
+                    }
+                });
+                
+                function checkPhoneNumber(mobile_no) {
+                    // Remove non-digit characters from the input
+                    mobile_no = mobile_no.replace(/\D/g, '');
+
+                    // Check if the number has a country code
+                    if (mobile_no.length > 10) {
+                        // Split the number into country code and local number
+                        let countryCode = mobile_no.slice(0, mobile_no.length - 10);
+                        let localNumber = mobile_no.slice(-10);
+
+                        return localNumber;
+                    } else {
+                        return mobile_no;
+                    }
+                }
+                otpInputGroup.style.display = 'block';
+                verifyMobileLink.style.display = 'none';
+                }, 1000);
+                }
+                var seconds = 15;
+                var timerInterval = setInterval(function () {
+                    if (seconds > 0) {
+                        document.getElementById('resendOtpBtn').innerText = 'Resend OTP in ' + seconds + ' seconds';
+                        seconds--;
+                    } else {
+                        clearInterval(timerInterval);
+                        document.getElementById('resendOtpBtn').innerText = 'Resend OTP';
+                        document.getElementById('resendOtpBtn').disabled = false;
+                    }
+                }, 1000);
+            }
+
+            function sendMobileNumberToBackend(mobileNumber) {
+                // Send an AJAX request to your backend (e.g., using Fetch API or XMLHttpRequest)
+                fetch('verify-mobile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ mobileNumber })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('OTP sent successfully:', data);
+                        // Handle the response from the backend (e.g., display a message to the user)
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function verifyOTP() {
+                showLoader();
+                var mobile_no = document.getElementById('mobile_no').value;
+                var otp = document.getElementById('otp').value;
+
+                // Replace with your actual CSRF token
+                var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                if (otp === null || otp.trim() === '') {
+                    // Show alert message
+                    window.alert("Please Enter Your OTP!");
+                    hideLoader2();
+                }else{
+                $.ajax({
+                    url: 'verify-otp/',  // Update this URL with the appropriate endpoint in your Django app
+                    type: 'POST',
+                    data: {
+                        'mobile_no': mobile_no,
+                        'otp': otp,
+                        'csrfmiddlewaretoken': csrfToken
+                    },
+                    success: function (data) {
+                        console.log(data);
+
+                        if (data.status === 'success') {
+                            // Hide the "Verify OTP" and "Resend OTP" buttons
+                            document.getElementById('verifyOtpBtn').style.display = 'none';
+                            document.getElementById('resendOtpBtn').style.display = 'none';
+                            document.getElementById('failedMessage').style.display = 'none';
+                            document.getElementById('successMsg').style.display = 'block';
+                            hideLoader2();
+                        } else {
+                            // Show the failure message
+                            document.getElementById('failedMessage').style.display = 'block';
+                            document.getElementById('successMsg').style.display = 'none';
+                            hideLoader2();
+                        }
+
+                        // Handle the response from the server as needed
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                        document.getElementById('failedMessage').style.display = 'block';
+                        hideLoader2();
+                        // Handle the error, e.g., show an error message
+                    }
+                });
+                
+                }
+            }
+            function showSuccessMessage() {
+                // Display the success message
+                var successMsg = document.getElementById('successMsg');
+                successMsg.style.display = 'block';
+        
+                // Hide the success message after 5 seconds (adjust as needed)
+                setTimeout(function () {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            }
+        
+            function showError() {
+                // Display the error message
+                var failedMessage = document.getElementById('failedMessage');
+                failedMessage.style.display = 'block';
+        
+                // Hide the error message after 5 seconds (adjust as needed)
+                setTimeout(function () {
+                    failedMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function CheckNUMBER() {
+                if(!CHECKNUMBER){
+                    window.alert("Please Verify Your Number")
+                    CheckNUMBER= false
+                }
+            }
+            
+            function showLoader() {
+                var loader = document.getElementById('loader-BTN');
+                var verifyMobileLink = document.getElementById('verifyMobileLink');
+                loader.style.display = 'block';
+                verifyMobileLink.style.display = 'none';
+                console.log('loader',loader)
+            }
+            function hideLoader1() {
+                
+                var loader = document.getElementById('loader-BTN');
+                var verifyMobileLink = document.getElementById('verifyMobileLink');
+                loader.style.display = 'none';
+                verifyMobileLink.style.display = 'inline-block';
+                console.log('loader',loader)
+            }
+            function hideLoader2() {
+                
+                var loader = document.getElementById('loader-BTN');
+                var verifyMobileLink = document.getElementById('verifyMobileLink');
+                loader.style.display = 'none';
+                console.log('loader',loader)
+            }
+        
+        </script>
+        <!--login password toggle-->
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("passwordInput");
+        var togglePassword = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            togglePassword.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            togglePassword.textContent = "Show";
+        }
+    }
+</script>
+<!--register password toggle-->
+<script>
+  $(document).ready(function () {
+    const togglePassword = $('.toggle-password');
+
+    togglePassword.on('click', function () {
+        const passwordField = $(this).prev();
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            $(this).removeClass('far fa-eye-slash').addClass('far fa-eye');
+        } else {
+            passwordField.attr('type', 'password');
+            $(this).removeClass('far fa-eye').addClass('far fa-eye-slash');
+        }
+    });
+});
+
+</script>
+        {% endblock%}

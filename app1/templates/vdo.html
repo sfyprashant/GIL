@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .ytp-impression-link
+    {
+        display:none;
+    }
+    h2 {
+        font-family: auto;
+        font-weight: normal;
+        font-size: 4rem;
+    }
+    hr {
+        margin: 15px 0 50px 0;
+    }
+</style>
+ <hr>
+<div class="container-fluid pl-60 pr-60 video">
+   
+    <h2 style="text-align:center;" class="pb-40">Video</h2>
+    <div class="row">
+        <div class="col-lg-10" style="margin:auto;">
+            <h5 class="pb-20">Timeless Choice: Gil's Best-Selling Black Leather Belt</h5>
+            <iframe class="youtube_play pb-40" src="https://www.youtube.com/embed/6VKIEdd9D1M?si=2fwoE7E9ClMo2ZQS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <!-- Begin Page Banner Area -->
+        <div class="page-banner contact-us-page-banner">
+            <div class="container-fluid pl-60 pr-60">
+                
+                <!-- <img src="{% static 'images/menu/logo/logo3.png' %}" alt=""> -->
+                <div class="page-banner-content">
+                    <!--<h2 class="text-light">GIL</h2>-->
+                    <!--<ul>-->
+                    <!--    <li><a href="/" >Home</a></li>-->
+                    <!--    <li class="active"><a href="{% url 'contact-us' %}">Contact Us</a></li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+        </div>
+        <!-- Page Banner Area End Here -->
+        
+        {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+        <!--Contact Area Start-->
+        <div class="contact-area">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="contact-form-wrap">
+                            {% comment %} <h2 class="contact-title">Contact us</h2> {% endcomment %}
+                            <form action="{% url 'contact-us' %}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="fname" placeholder="First Name*" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="lname" placeholder="Last Name*" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="email" placeholder="Email*" type="email" inputmode="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="subject" placeholder="Subject*" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="contact-form-style">
+                                            <textarea name="con_message" placeholder="Type your message here.."    required></textarea>
+                                            <button class="form-button" type="submit"><span>Submit</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <p class="form-messege mt-3"></p> -->
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <div class="raavin-address">
+                            <h2 class="contact-title">CONTACT US</h2>
+                            {% comment %} <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                                Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit
+                                litterarum formas human.</p> {% endcomment %}
+                            <ul>
+                                <li><a href="https://maps.app.goo.gl/hGSetXX9HzXCv9DK9" target="_blank"><i
+                                            class="fa fa-fax"></i> Address : D-5, Site 1,
+                                    Panki Industrial Area Kanpur, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp; Uttar Pradesh 208022 India</a></li>
+                                <li><a href="tel:+91-512-2692444" target="_blank"><i class="fa fa-phone"></i>
+                                        +91-512-2692444</a></li>
+                                <li><a href="mailto:info@leathergil.com" target="_blank"><i class="fa fa-envelope-o"></i>
+                                        info@leathergil.com</a></li>
+                            </ul>
+                            <div class="working-time">
+                                <h3><strong> Also available on</strong></h3>
+                                <p><strong> <a href="https://www.amazon.in/stores/page/13B9F4D1-0DCA-4642-9EF8-EA645E47B75C?ingress=3"> Amazon</a> & <a href="https://www.flipkart.com/search?q=gil+belts&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&augment=false">Flipkart</a></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Contact Area End-->
+        <!--Google Map Area Start-->
+        <div class="google-map-area">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14287.862551832219!2d80.257587!3d26.45683655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c49f3d79eb9e7%3A0x61a6eec0fce2cb83!2sPanki%20Industrial%20Area%2C%20Site%205%2C!5e0!3m2!1sen!2sin!4v1701689257567!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!--Google Map Area Start-->
+        {% endblock %}

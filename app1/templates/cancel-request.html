@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<style>
+    .my-account>.container-fluid {
+        padding-right: 60px;
+        padding-left: 60px;
+        background: #f5f0ec;
+    }
+
+    /* Breadcrumb Styles */
+    .breadcrumb-wrap {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .breadcrumb-item {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    /* Tab Navigation Styles */
+    .nav-pills .nav-link {
+        padding: 10px 15px;
+        color: #353535;
+        background: #ffffff;
+        border-radius: 0;
+        border-bottom: 1px solid #dddddd;
+        transition: all .3s;
+    }
+
+    .nav-pills .nav-link:hover,
+    .nav-pills .nav-link.active {
+        color: #ffffff;
+        background: #cb9a00;
+    }
+
+    .my-account .nav.nav-pills .nav-link i {
+        margin-right: 5px;
+    }
+
+    .nav-pills .nav-link.active {
+        color: #fff;
+        background-color: #cb9a00;
+    }
+
+    /* Table Styles */
+    .table{
+        border: 2px solid ;
+    }
+
+    th,td {
+        border: 1px solid;
+        text-align: center;
+    }
+
+    /* Button Styles */
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0;
+    }
+
+    /* Form Styles */
+    .form-control {
+        margin-bottom: 10px;
+        background-color: #eceff8;
+        border: 1px solid #d6d4d4;
+        border-radius: 0;
+        box-shadow: none;
+        color: #000;
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        height: 27px;
+        line-height: 1.42857;
+        padding: 3px 5px;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+        background: #eceff8;
+        border: 2px solid #eceff8;
+        /* height: 45px; */
+        padding-left: 10px;
+        font-weight: 700;
+        box-shadow: none;
+        font-size: 14px;
+        font-size: 13px;
+        font-weight: 700;
+        height: 27px;
+        color: #000;
+    }
+
+    input[type="radio"] {
+        background: #eceff8;
+        border: 2px solid #eceff8;
+        height: fit-content;
+        display: inline-block;
+        box-shadow: none;
+        padding-left: 10px;
+        width: auto;
+        font-size: 14px;
+        color: #626262;
+    }
+</style>
+
+<!-- Breadcrumb Start -->
+<div class="page-banner account-page-banner">
+    <div class="container">
+        <div class="page-banner-content">
+            <!--<h2>GIL</h2>-->
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="#">MY Account</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+{% if messages %}
+{% for message in messages %}
+<div class="mass alert alert-{{ message.tags }} mt-4">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<!-- My Account Start -->
+<div class="my-account">
+    <div class="container-fluid">
+        <div class="row mt-5 mb-5">
+            <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Product</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ old_cart.order.order_id }}</td>
+                                    <td><img src="{{ old_cart.order.product.prod_image.url }}" height="70px" width="70px"/></td>
+                                    <td>{{ old_cart.order.product.product_name }}</td>
+                                    <td>{{ old_cart.quantity }}</td>
+                                    <td>{{ old_cart.order.status }}</td>
+                                    <td>₹{{ old_cart.total_cost }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5">
+            <div class="col-md-12">
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <h4>Reason For Cancellation</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class = "form-check-label" for = "btn1">
+                            <input type="radio" id="btn1" name="reason" required>
+                            I was hoping for a shorter delivery time.
+                            </label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for ="btn2">
+                            <input type="radio" id="btn2" name="reason" required>
+                            I want to change the contact details.
+                            </label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for ="btn3">
+                            <input type="radio" name="reason" id="btn3" required>
+                            I want to change the payment option.
+                            </label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for = "btn4">
+                            <input type="radio" name="reason" id="btn4" required>
+                            My reasons are not listed here.
+                            </label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for = "btn5">
+                            <input type="radio" name="reason" id="btn5" required>
+                            I'm worried about the ratings/reviews.</label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for = "btn6">
+                            <input type="radio" name="reason" id="btn6" required>
+                            I want to change the delivery address.</label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for = "btn7">
+                            <input type="radio" name="reason" id="btn7" required>
+                            Price of the product has now decreased.</label>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label class = "form-check-label" for = "btn8">
+                            <input type="radio" name="reason" id="btn8" required>
+                            I want to change the size/color/type.</label>
+                        </div>
+                        <div class="mt-2 form-fild">
+                            <input type="text" name="comment" placeholder="Reason*" required>
+                        </div>
+                                <div class="login-submit">
+                                <button type="submit" class="form-button">Submit Request</button>
+                            </div>
+
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- My Account End -->
+
+
+{% endblock %}

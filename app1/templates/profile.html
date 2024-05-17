@@ -1,0 +1,530 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .my-account>.container-fluid {
+        padding-right: 60px;
+        padding-left: 60px;
+        background: #f5f0ec;
+    }
+    /* Breadcrumb Styles */
+    .breadcrumb-wrap {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .breadcrumb-item {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    /* Tab Navigation Styles */
+    .nav-pills .nav-link {
+        padding: 10px 15px;
+        color: #353535;
+        background: #ffffff;
+        border-radius: 0;
+        border-bottom: 1px solid #dddddd;
+        transition: all .3s;
+    }
+
+    .nav-pills .nav-link:hover,
+     .nav-pills .nav-link.active {
+    color: #ffffff;
+    background: #cb9a00;
+    }
+
+.my-account .nav.nav-pills .nav-link i {
+    margin-right: 5px;
+}
+
+    .nav-pills .nav-link.active {
+        color: #fff;
+        background-color: #cb9a00;
+    }
+
+    /* Table Styles */
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+
+    .thead-dark th {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    /* Button Styles */
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0;
+    }
+
+    /* Form Styles */
+    .form-control {
+        margin-bottom: 10px;
+        background-color: #eceff8;
+        border: 1px solid #d6d4d4;
+        border-radius: 0;
+        box-shadow: none;
+        color: #000;
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        height: 27px;
+        line-height: 1.42857;
+        padding: 3px 5px;
+        vertical-align: middle;
+        width: 100%;
+    }
+    select {
+        width: 100%;
+        background: #eceff8;
+        border: 2px solid #eceff8;
+        /* height: 45px; */
+        padding-left: 10px;
+        font-weight: 700;
+        box-shadow: none;
+        font-size: 14px;
+        font-size: 13px;
+        font-weight: 700;
+        height: 27px;
+        color: #000;
+    }
+</style>  
+<style>
+   .password-toggle {
+        position: relative;
+    }
+    
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+</style>
+        <!-- Breadcrumb Start -->
+        <div class="page-banner account-page-banner">
+            <div class="container">
+                <div class="page-banner-content">
+                    <!--<h2>GIL</h2>-->
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><i class="fa-solid fa-angles-right"></i></li>
+                        <li class="active"><a href="#">MY Account</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        {% if messages %}
+    {% for message in messages %}
+        <div class="mass alert alert-{{ message.tags }} mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+        <!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row mt-5 mb-5">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" style="margin: 10%;">
+                            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab">
+                                <i class="fa fa-tachometer-alt"></i>Dashboard
+                            </a>
+                            <a class="nav-link profile-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab">
+                                <i class="fa fa-shopping-bag"></i>Orders
+                            </a>
+                            <a class="nav-link profile-link" id="cancelorders-nav" data-toggle="pill" href="#cancelorders-tab" role="tab">
+                                <i class="fa fa-shopping-bag"></i>Cancelled Orders
+                            </a>
+                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab">
+                                <i class="fa fa-credit-card"></i>Payment History
+                            </a> 
+                            <a class="nav-link profile-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab">
+                                <i class="fa fa-map-marker-alt"></i>Address
+                            </a>
+                            <a class="nav-link profile-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab">
+                                <i class="fa fa-user"></i>Account Details
+                            </a>
+                            <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+                                <h4>Dashboard</h4>
+                                <p> Hello,&nbsp;{{request.user.first_name}}</p>
+                                    <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p> 
+                            </div>
+                            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Quantity</th>
+                                                <th>Status</th>
+                                                <th>Total Cost</th>
+                                                <th>Address</th>
+                                                <th>Order Detail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order_detail in order_details %}     
+                                                <tr>
+                                                    <td>{{ order_detail.order_id }}</td>
+                                                    <td>{{ order_detail.quantity }}</td>
+                                                    <td>{{ order_detail.status }}</td>
+                                                    <td>₹{{ order_detail.total_cost }}</td>
+                                                    <td>{{ order_detail.ship_address }}, {{ order_detail.ship_town }}, {{ order_detail.ship_state }} - {{ order_detail.ship_zip }}</td>
+                                                    <td><a class="form-button more-details" href="#order-details" onclick="loadOrderDetails(`{{ order_detail.order_id }}`)">See More</a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="cancelorders-tab" role="tabpanel" aria-labelledby="cancelorders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Quantity</th>
+                                                <th>Cancel Status</th>
+                                                <th>Total Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in Cancel %}     
+                                                <tr>
+                                                    <td>{{ i.order.order_id }}</td>
+                                                    <!--<td><img src="{{ order_detail.product_url }}"/></td>-->
+                                                    <!--<td>{{ order_detail.product_url }}</td>-->
+                                                    <!--<td>{{ order_detail.product_name }}</td>-->
+                                                    <td>{{ i.old_cart.quantity }}</td>
+                                                    <td>{{ i.cancel_check }}</td>
+                                                    <td>₹{{ i.old_cart.total_cost }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="order-details" role="tabpanel" aria-labelledby="orders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Cancellation Request</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body-oldcart">
+                                    
+                                </tbody>
+                            </table>
+                                </div>
+                            </div>
+
+                            
+                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                                <h2>Payment History:</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment ID</th>
+                                            <th>Amount</th>
+                                            <th>Currency</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for payment in payment_history %}
+                                            <tr>
+                                                <td>{{ payment.payment_id }}</td>
+                                                <td>{{ payment.amount }}</td>
+                                                <td>{{ payment.currency }}</td>
+                                                <td>{{ payment.payment_status }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                                <!-- <h4 class="text-center">Address</h4> -->
+                                <form method="post" action="{% url 'edit_address' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Payment Address</h4>
+                                            <div class="form-group">
+                                                <label for="billing_country">Country</label>
+                                                <input type="text" class="form-control" id="billing_country" name="country" value="{{ addresses.0.billing.country }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="billing_locality">Locality</label>
+                                                <input type="text" class="form-control" id="billing_locality" name="locality" value="{{ addresses.0.billing.locality }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="billing_city">City</label>
+                                                <input type="text" class="form-control" id="billing_city" name="city" value="{{ addresses.0.billing.city }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="billing_state">State</label>
+                                                <input type="text" class="form-control" id="billing_state" name="state" value="{{ addresses.0.billing.state }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="billing_zipcode">Zipcode</label>
+                                                <input type="text" class="form-control" id="billing_zipcode" name="zipcode" value="{{ addresses.0.billing.zipcode }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4>Shipping Address</h4>
+                                            <div class="form-group">
+                                                <label for="shipping_country">Country</label>
+                                                <input type="text" class="form-control" id="shipping_country" name="ship_country" value="{{ addresses.0.shipping.country }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="shipping_locality">Locality</label>
+                                                <input type="text" class="form-control" id="shipping_locality" name="ship_address" value="{{ addresses.0.shipping.address }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="shipping_city">City</label>
+                                                <input type="text" class="form-control" id="shipping_city" name="ship_town" value="{{ addresses.0.shipping.town }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="shipping_state">State</label>
+                                                <input type="text" class="form-control" id="shipping_state" name="ship_state" value="{{ addresses.0.shipping.state }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="shipping_zipcode">Zipcode</label>
+                                                <input type="text" class="form-control" id="shipping_zipcode" name="ship_zip" value="{{ addresses.0.shipping.zipcode }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <button class="form-button" type="submit">Edit Address</button>
+                                    </div>
+                                </form>
+                                
+                        
+                                
+                            </div>
+                            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                                <h4>Account Details</h4>
+                                <form method="post" action="{% url 'update_account' %}">
+                                    {% csrf_token %}
+                                <div class="row">
+                                    
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="first_name" placeholder="First Name" value="{{ user_profile.user.first_name }}" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="last_name"  placeholder="Last Name" value="{{ user_profile.user.last_name }}" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="mobile" placeholder="Mobile" value="{{ user_profile.mobile_no }}" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="email" placeholder="Email" value="{{ user_profile.user.email }}" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="dob" placeholder="DOB" value="{{ user_profile.dob }}" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select name="gender" >
+                                                <option value="Male" {% if user_profile.gender == 'Male' %}selected{% endif %}>Male</option>
+                                                <option value="Female" {% if user_profile.gender == 'Female' %}selected{% endif %}>Female</option>
+                                                <option value="Other" {% if user_profile.gender == 'Other' %}selected{% endif %}>Other</option>
+                                                <!-- Add more options as needed -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="form-button" type="submit">Update Account</button>
+                                            <br><br>
+                                        </div>
+                                    
+                                </div>
+                            </form>
+                            <form method="post" action="{% url 'change_password' %}">
+                                {% csrf_token %}
+                                <h4>Password change</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" name="current_password" placeholder="Current Password" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="password-toggle">
+                                            <input class="form-control" type="password" name="new_password" id="new_password" placeholder="New Password" required>
+                                            <i class="toggle-password far fa-eye-slash" id="toggleNewPassword"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="password-toggle">
+                                            <input class="form-control" type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                                            <i class="toggle-password far fa-eye-slash" id="toggleConfirmPassword"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="form-button" type="submit">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+        
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function loadOrderDetails(orderId) {
+			// Call a function to send the data to the Django view
+			sendUpdateToServer(orderId);
+			console.log('orderId',orderId)
+		}
+	
+		function sendUpdateToServer(orderId) {
+			// You can use AJAX to send the data to your Django view
+			$.ajax({
+				url: 'show-order',  // Replace with the actual URL
+				type: 'POST',
+				data: {
+					order_id: orderId,
+					csrfmiddlewaretoken: '{{ csrf_token }}'  // Include CSRF token for security
+				},
+				success: function (response) {
+				    if (response.oldcart) {
+                    
+                    var oldcart = response.oldcart;
+                    var tableBody = document.getElementById("table-body-oldcart");
+            
+                    // Clear previous data from the table
+                    tableBody.innerHTML = "";
+            
+                    // Loop through each item in the oldcart and create table rows
+                        oldcart.forEach(function(item) {
+                            var newRow = document.createElement("tr");
+
+                            var imgCell = document.createElement("td");
+                            var img = document.createElement("img");
+                            img.src = item.product_image;
+                            img.alt = item.product_name;
+                            img.height = "70";
+                            img.width = "70";
+                            imgCell.appendChild(img);
+                            newRow.appendChild(imgCell);
+
+                            var nameCell = document.createElement("td");
+                            nameCell.className = "text-center";
+                            nameCell.style.fontSize = "larger";
+                            var productName = document.createElement("a");
+                            productName.innerText = item.product_name;
+                            
+                            productName.href = 'https://growmore.in/product-details/' + item.product_id;
+                            nameCell.appendChild(productName);
+                            newRow.appendChild(nameCell);
+
+                            var quantityCell = document.createElement("td");
+                            quantityCell.innerText = item.oldcart_quantity;
+                            newRow.appendChild(quantityCell);
+
+                            var costCell = document.createElement("td");
+                            costCell.innerText = "₹" + item.oldcart_amount;
+                            newRow.appendChild(costCell);
+
+                            var requestCell = document.createElement("td");
+                            var requestLink = document.createElement("a");
+                            requestLink.className = "form-button";
+                            
+                            requestLink.href = 'https://growmore.in/cancellation-request/' + item.oldcart_id;
+                            
+                            requestLink.innerText = "Request";
+                            requestCell.appendChild(requestLink);
+                            newRow.appendChild(requestCell);
+
+                            tableBody.appendChild(newRow);
+                        });
+                    }
+					console.log(response);
+				},
+				error: function (error) {
+					// Handle error, if needed
+					console.error(error);
+					console.error("DATA BASE ME ERROR HAI");
+				}
+			});
+		}
+</script>
+<script>
+    $(document).ready(function () {
+        // Handle click events on nav links
+        $('.profile-link').on('click', function (e) {
+            e.preventDefault();
+
+            // Hide all tab content
+            $('.tab-pane').removeClass('show active');
+
+            // Show the corresponding tab content
+            var targetTabId = $(this).attr('href');
+            $(targetTabId).addClass('show active');
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Handle click events on nav links
+        $('.more-details').on('click', function (e) {
+            e.preventDefault();
+
+            // Hide all tab content
+            $('.tab-pane').removeClass('show active');
+
+            // Show the corresponding tab content
+            var targetTabId = $(this).attr('href');
+            $(targetTabId).addClass('show active');
+        });
+    });
+</script>
+<script>
+  $(document).ready(function () {
+    const togglePassword = $('.toggle-password');
+
+    togglePassword.on('click', function () {
+        const passwordField = $(this).prev();
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            $(this).removeClass('far fa-eye-slash').addClass('far fa-eye');
+        } else {
+            passwordField.attr('type', 'password');
+            $(this).removeClass('far fa-eye').addClass('far fa-eye-slash');
+        }
+    });
+});
+
+</script>
+
+        {% endblock %}

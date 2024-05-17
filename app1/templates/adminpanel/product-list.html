@@ -1,0 +1,1776 @@
+{% extends "adminpanel/admin-base.html" %}
+{% load static %}
+{% block content %}
+	<style>
+		/* CSS for Django messages */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Styles for different message types */
+.alert-success {
+    background-color: #dff0d8;
+    border: 1px solid #d0e9c6;
+    color: #3c763d;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    color: #31708f;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    color: #8a6d3b;
+}
+
+.alert-error {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+}
+
+	</style>
+
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endif %}
+					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+						<div>
+							<h1>Product</h1>
+							<p class="breadcrumbs"><span><a href="{% url 'admin-dashboard' %}">Home</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+						</div>
+						<div>
+							<a href="{% url 'add-product' %}" class="btn btn-primary"> Add Porduct</a>
+						</div>
+					</div>
+					<div class="row">
+			<div class="col-md-6">
+				<label class="form-label text-black">Select Categories</label>
+				<select id="category-select-new" name="categories" class="form-select">
+					<option value="0">Select Option</option>
+					<option value="Purse">Wallets and Accessories</option>
+					<option value="Belt">Belt</option>
+					<option value="Combo">Combo</option>
+				</select>
+			</div>
+		</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table"
+											style="width:100%">
+											<thead>
+												<tr>
+												    <th>Product</th>
+													<th>Name</th>
+            										<th>Selling Price</th>
+            										<th>Discounted Price</th>
+            										<!-- <th>Purchased</th> -->
+            										<th>Stock</th>
+            										<th>Date</th>
+            										<th>Action</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												{% for i in product %}
+												<tr>
+												    <td>
+                                                        {% if i.prod_image %}
+                                                            <img class="tbl-thumb" src="{{ i.prod_image.url }}" alt="{{ i.product_name }}">
+                                                        {% else %}
+                                                            <img class="tbl-thumb" src="{% static 'images/loader.gif' %}" alt="Default Image">
+                                                        {% endif %}
+                                                    </td>
+
+													<td>{{ i.product_name }}</td>
+													<td>{{ i.selling_price }}</td>
+            										<td>{{ i.discounted_price }}</td>
+            										<td>{{ i.availability }}</td>
+            										<td>{{ i.pub_date }}</td>
+													<!--<td>-->
+													<!--	<div class="btn-group mb-1">-->
+													<!--		<button type="button"-->
+													<!--			class="btn btn-outline-success">Info</button>-->
+													<!--		<button type="button"-->
+													<!--			class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"-->
+													<!--			data-bs-toggle="dropdown" aria-haspopup="true"-->
+													<!--			aria-expanded="false" data-display="static">-->
+													<!--			<span class="sr-only">Info</span>-->
+													<!--		</button>-->
+
+													<!--		<div class="dropdown-menu">-->
+													<!--			<a class="dropdown-item" href="{% url 'update-product' i.id %}">Edit</a>-->
+													<!--			<a class="dropdown-item" href="{% url 'delete-product' i.id %}">Delete</a>-->
+													<!--		</div>-->
+													<!--	</div>-->
+													<!--</td>-->
+													<td>
+    <div class="btn-group mb-1">
+        <button type="button" class="btn btn-outline-success" id="dropdownMenuButton">Info</button>
+        <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'update-product' i.id %}">Edit</a>
+            <a class="dropdown-item" href="{% url 'delete-product' i.id %}">Delete</a>
+        </div>
+    </div>
+</td>
+
+<script>
+  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+    return new bootstrap.Dropdown(dropdownToggleEl)
+  });
+</script>
+
+												</tr>
+												{% endfor %}
+												<!-- <tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p2.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>80</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p3.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve T-Shirt</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>100</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p4.jpg" alt="Product Image" /></td>
+													<td>Round Cap with Belt</td>
+													<td>$10</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p5.jpg" alt="Product Image" /></td>
+													<td>Purse For Woman</td>
+													<td>$20</td>
+													<td>30% OFF</td>
+													<td>220</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p6.jpg" alt="Product Image" /></td>
+													<td>Doctor Kit for Kids</td>
+													<td>$30</td>
+													<td>20% OFF</td>
+													<td>120</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p7.jpg" alt="Product Image" /></td>
+													<td>Shirt For Men</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>550</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p8.jpg" alt="Product Image" /></td>
+													<td>Digital Watch</td>
+													<td>$120</td>
+													<td>80% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p9.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$20</td>
+													<td>10% OFF</td>
+													<td>650</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p10.jpg" alt="Product Image" /></td>
+													<td>Green shoes for Men</td>
+													<td>$30</td>
+													<td>50% OFF</td>
+													<td>350</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p11.jpg" alt="Product Image" /></td>
+													<td>Purpule woman Purse</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>900</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p12.jpg" alt="Product Image" /></td>
+													<td>Schendle For Girl</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p13.jpg" alt="Product Image" /></td>
+													<td>Full Purse Green</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p14.jpg" alt="Product Image" /></td>
+													<td>White shoes</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p15.jpg" alt="Product Image" /></td>
+													<td>Pink Baby shoes</td>
+													<td>$80</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p16.jpg" alt="Product Image" /></td>
+													<td>Big Basket Bag</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>1250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p17.jpg" alt="Product Image" /></td>
+													<td>Wireless Buds</td>
+													<td>$90</td>
+													<td>30% OFF</td>
+													<td>950</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p1.jpg" alt="Product Image" /></td>
+													<td>Baby shoes</td>
+													<td>$20</td>
+													<td>25% OFF</td>
+													<td>61</td>
+													<td>ACTIVE</td>
+													<td>5421</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p2.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>80</td>
+													<td>ACTIVE</td>
+													<td>2521</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p3.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve T-Shirt</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>100</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p4.jpg" alt="Product Image" /></td>
+													<td>Round Cap with Belt</td>
+													<td>$10</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p5.jpg" alt="Product Image" /></td>
+													<td>Purse For Woman</td>
+													<td>$20</td>
+													<td>30% OFF</td>
+													<td>220</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p6.jpg" alt="Product Image" /></td>
+													<td>Doctor Kit for Kids</td>
+													<td>$30</td>
+													<td>20% OFF</td>
+													<td>120</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p7.jpg" alt="Product Image" /></td>
+													<td>Shirt For Men</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>550</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p8.jpg" alt="Product Image" /></td>
+													<td>Digital Watch</td>
+													<td>$120</td>
+													<td>80% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p9.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$20</td>
+													<td>10% OFF</td>
+													<td>650</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p10.jpg" alt="Product Image" /></td>
+													<td>Green shoes for Men</td>
+													<td>$30</td>
+													<td>50% OFF</td>
+													<td>350</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p11.jpg" alt="Product Image" /></td>
+													<td>Purpule woman Purse</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>900</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p12.jpg" alt="Product Image" /></td>
+													<td>Schendle For Girl</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p13.jpg" alt="Product Image" /></td>
+													<td>Full Purse Green</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p14.jpg" alt="Product Image" /></td>
+													<td>White shoes</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p15.jpg" alt="Product Image" /></td>
+													<td>Pink Baby shoes</td>
+													<td>$80</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p16.jpg" alt="Product Image" /></td>
+													<td>Big Basket Bag</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>1250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p17.jpg" alt="Product Image" /></td>
+													<td>Wireless Buds</td>
+													<td>$90</td>
+													<td>30% OFF</td>
+													<td>950</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p1.jpg" alt="Product Image" /></td>
+													<td>Baby shoes</td>
+													<td>$20</td>
+													<td>25% OFF</td>
+													<td>61</td>
+													<td>ACTIVE</td>
+													<td>5421</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p2.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>80</td>
+													<td>ACTIVE</td>
+													<td>2521</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p3.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve T-Shirt</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>100</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p4.jpg" alt="Product Image" /></td>
+													<td>Round Cap with Belt</td>
+													<td>$10</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p5.jpg" alt="Product Image" /></td>
+													<td>Purse For Woman</td>
+													<td>$20</td>
+													<td>30% OFF</td>
+													<td>220</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p6.jpg" alt="Product Image" /></td>
+													<td>Doctor Kit for Kids</td>
+													<td>$30</td>
+													<td>20% OFF</td>
+													<td>120</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p7.jpg" alt="Product Image" /></td>
+													<td>Shirt For Men</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>550</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p8.jpg" alt="Product Image" /></td>
+													<td>Digital Watch</td>
+													<td>$120</td>
+													<td>80% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p9.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$20</td>
+													<td>10% OFF</td>
+													<td>650</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p10.jpg" alt="Product Image" /></td>
+													<td>Green shoes for Men</td>
+													<td>$30</td>
+													<td>50% OFF</td>
+													<td>350</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p11.jpg" alt="Product Image" /></td>
+													<td>Purpule woman Purse</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>900</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p12.jpg" alt="Product Image" /></td>
+													<td>Schendle For Girl</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p13.jpg" alt="Product Image" /></td>
+													<td>Full Purse Green</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p14.jpg" alt="Product Image" /></td>
+													<td>White shoes</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>500</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p15.jpg" alt="Product Image" /></td>
+													<td>Pink Baby shoes</td>
+													<td>$80</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p16.jpg" alt="Product Image" /></td>
+													<td>Big Basket Bag</td>
+													<td>$60</td>
+													<td>40% OFF</td>
+													<td>1250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p17.jpg" alt="Product Image" /></td>
+													<td>Wireless Buds</td>
+													<td>$90</td>
+													<td>30% OFF</td>
+													<td>950</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p1.jpg" alt="Product Image" /></td>
+													<td>Baby shoes</td>
+													<td>$20</td>
+													<td>25% OFF</td>
+													<td>61</td>
+													<td>ACTIVE</td>
+													<td>5421</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p2.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve Cap T-Shirt</td>
+													<td>$40</td>
+													<td>30% OFF</td>
+													<td>80</td>
+													<td>ACTIVE</td>
+													<td>2521</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p3.jpg" alt="Product Image" /></td>
+													<td>Full Sleeve T-Shirt</td>
+													<td>$30</td>
+													<td>30% OFF</td>
+													<td>100</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p4.jpg" alt="Product Image" /></td>
+													<td>Round Cap with Belt</td>
+													<td>$10</td>
+													<td>30% OFF</td>
+													<td>250</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p5.jpg" alt="Product Image" /></td>
+													<td>Purse For Woman</td>
+													<td>$20</td>
+													<td>30% OFF</td>
+													<td>220</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+												<tr>
+													<td><img class="tbl-thumb" src="assets/img/products/p6.jpg" alt="Product Image" /></td>
+													<td>Doctor Kit for Kids</td>
+													<td>$30</td>
+													<td>20% OFF</td>
+													<td>120</td>
+													<td>621</td>
+													<td>ACTIVE</td>
+													<td>2021-10-30</td>
+													<td>
+														<div class="btn-group mb-1">
+															<button type="button"
+																class="btn btn-outline-success">Info</button>
+															<button type="button"
+																class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+																data-bs-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false" data-display="static">
+																<span class="sr-only">Info</span>
+															</button>
+
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="#">Edit</a>
+																<a class="dropdown-item" href="#">Delete</a>
+															</div>
+														</div>
+													</td>
+												</tr> -->
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+<script>
+	// JavaScript
+	document.getElementById('category-select-new').addEventListener('change', function () {
+		const category = this.value;
+		const subcategorySelect = document.getElementById('subcategory-select');
+		
+
+		// Construct the URL
+		console.log(category + " category ")
+		var url = '/product-list-filter/' + category;
+
+		// Open the URL in the current window
+		window.location.href = url;
+		// Clear existing options
+		subcategorySelect.innerHTML = '<option value="0">Select Option</option>';
+
+		// Add new options based on selected category
+		if (category === 'Belt') {
+			subcategorySelect.innerHTML += `
+                <option value="Signature Belts">Signature Belts</option>
+                <option value="Reversible Belts">Reversible Belts</option>
+                <option value="Casual Belts">Casual Belts</option>
+                <option value="Formal Belts">Formal Belts</option>
+                <option value="Semi Formal Belts">Semi Formal Belts</option>
+                <option value="Braided/Ladies Belt">Braided/Ladies Belt</option>
+            `;
+		} else if (category === 'Purse') {
+			subcategorySelect.innerHTML += `
+                <option value="Wallets">Wallets</option>
+                <option value="Accessories">Accessories</option>
+            `;
+		} else if (category === 'Combo') {
+			subcategorySelect.innerHTML += `
+                <option value="Corporate Gifts">Corporate Gifts</option>
+            `;
+		}
+	});
+</script>
+<script>
+	document.getElementById('subcategory-select').addEventListener('change', function () {
+		var subcategorySelect = document.getElementById("subcategory-select");
+		const categoryselect = document.getElementById('category-select-new');
+		var category = categoryselect.value;;
+		var selectedSubcategory = subcategorySelect.value;
+		
+		var url = '/product-list-filter/' + category;
+	
+	});
+	</script>
+			<!-- Footer -->
+
+{% endblock %}

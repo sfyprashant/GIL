@@ -1,0 +1,232 @@
+{% extends "adminpanel/admin-base.html" %}
+{% load static %}
+{% block content %}
+	<style>
+		/* CSS for Django messages */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Styles for different message types */
+.alert-success {
+    background-color: #dff0d8;
+    border: 1px solid #d0e9c6;
+    color: #3c763d;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    color: #31708f;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    color: #8a6d3b;
+}
+
+.alert-error {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+}
+
+	</style>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+						<div>
+							<h1>Add Product</h1>
+							<p class="breadcrumbs"><span><a href="{% url 'admin-dashboard' %}">Home</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+						</div>
+						<div>
+							<a href="{% url 'product-list' %}" class="btn btn-primary"> View All
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-header card-header-border-bottom">
+									<h2>Add Product</h2>
+								</div>
+
+								<div class="card-body">
+									<div class="row ec-vendor-uploads">
+										
+										<div class="col-lg-12">
+											<div class="ec-vendor-upload-detail">
+												<form class="row g-3" method="post" enctype='multipart/form-data' action="{% url 'update-product' product.id %}">
+													{% csrf_token %}
+													<div class="col-md-6">
+														<label for="inputEmail4" class="form-label">Product name</label>
+														<input type="text" name="product_name" value="{{ product.product_name }}" class="form-control slug-title" id="inputEmail4">
+													</div>
+													<div class="col-md-6">
+														<label class="form-label">Select Categories</label>
+														<select name="categories" id="category-select-new" class="form-select">
+															<option value="{{ product.category }}" selected>{{ product.category }}</option>
+															<option value="Purse">Purse</option>
+															<option value="Belt">Belt</option>
+															<option value="Combo">Combo</option>
+														</select>
+													</div>
+													<div class="col-md-6">
+														<label for="Sub_Categories" class="col-12 col-form-label">Sub Categories</label> 
+														<div class="col-6">
+														    <select id="subcategory-select"  value="{{ product.subcategory }}" name="sub_categories" class="form-select" required>
+                												<option value="{{ product.subcategory }}" selected>{{ product.subcategory }}</option>
+                												<option value="0">Select Option</option>
+                											</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<label for="inputEmail4" class="form-label">Brand</label>
+														<input type="text" name="barnd" value="{{ product.Brand }}" class="form-control slug-title" id="inputEmail4">
+													</div>
+													<div class="col-md-12">
+														<label class="form-label">Description</label>
+														<input type="text" class="form-control" value="{{ product.desc }}"  name="description" />
+													</div>
+												
+													<div class="col-md-6">
+														<label class="form-label">Selling Price </label>
+														<input type="number" name="selling_price" class="form-control" value="{{ product.selling_price }}" id="price1">
+													</div>
+													<div class="col-md-6">
+														<label class="form-label">Discounted Price </label>
+														<input type="number" name="discounted_price" value="{{ product.discounted_price }}" class="form-control" id="price1">
+													</div>
+													<!--<div class="col-md-6">-->
+													<!--	<label class="form-label">Quantity</label>-->
+													<!--	<input type="number" name="quantity" class="form-control" id="quantity1" value="{{ product.quantity }}">-->
+													<!--</div>-->
+													<div class="col-md-6">
+														<label class="form-label">Availability</label>
+														<select name="availability" id="Categoriesww" class="form-select">
+															<option value="{{ product.availability }}" selected>{{ product.availability }}</option>
+															<option value="In Stock">Yes</option>
+															<option value="Not Available In Stock">No</option>
+														</select>
+													</div>
+													<div class="col-md-6">
+														<label for="Sub_Categories2" class="form-label">Condition</label> 
+															<input id="Sub_Categories2" value="condition" name="condition" class="form-control here set-slug" type="text">
+														
+													</div>
+													<div class="col-md-12">
+														<label class="form-label">Add B2B </label>
+														<select name="B2B" id="Categories" value="{{ product.b2b }}" class="form-select">
+															<option value="0">Select Option</option>
+															<option value="True">Yes</option>
+															<option value="False">No</option>
+														</select>
+													</div>
+													<!--<div class="col-md-6">-->
+														
+													<!--	<label for="img6" class="image-picker">-->
+															<!--<img src="{{ product.rating.url }}" alt="Product Image" id="img1_preview" height="100px" width="100px" />-->
+													<!--		<input type="text" name="ratingimg" id="img6" value="{{ product.rating }}" class="form-control" accept=".png, .jpg, .jpeg" style="display: none;" />-->
+													<!--	</label>-->
+													<!--	<label class="form-label">Rating </label>-->
+													<!--</div>-->
+													<br>
+													<div class="col-md-6">
+														
+														<label for="img1" class="image-picker">
+															<img src="{{ product.prod_image.url }}" alt="Product Image" id="img1_preview" height="100px" width="100px" />
+															<input type="file" name="img1" id="img1" value="{{ product.prod_image }}" class="form-control ec-image-upload" accept=".png, .jpg, .jpeg" />
+															<input type="hidden" name="img1" value="{{ product.prod_image }}" class="form-control ec-image-upload" />
+														</label>
+														<label class="form-label">Product Image </label>
+														{% comment %} <input type='text' name="img1" id="thumbUpload06"
+																	class="ec-image-upload" value="{{product.prod_image}}"
+																	accept=".png, .jpg, .jpeg" /> {% endcomment %}
+													</div>
+													<div class="col-md-6">
+														
+														<label for="img2" class="image-picker">
+															<img src="{{ product.prod_image_detail.url }}" alt="Product Image" id="img1_preview" height="100px" width="100px" />
+															<input type="file" name="img2" id="img2" value="{{ product.prod_image_detail }}" class="form-control ec-image-upload" accept=".png, .jpg, .jpeg" />
+															<input type="hidden" name="img2" value="{{ product.prod_image_detail }}" class="form-control ec-image-upload"/>
+														</label>
+														<label class="form-label">Secend Product Image </label>
+														{% comment %} <input type='text' name="img2" id="thumbUpload06"
+																	class="ec-image-upload" value="{{ product.prod_image_detail }}"
+																	accept=".png, .jpg, .jpeg" /> {% endcomment %}
+													</div>
+													<div class="col-md-6">
+														
+														<label for="img3" class="image-picker">
+															<img src="{{ product.prod_image_detail.url }}" alt="Product Image" id="img1_preview" height="100px" width="100px" />
+															<input type="file" name="imgdec" id="img3" value="{{ product.prod_image_detail }}" class="ec-image-upload form-control" accept=".png, .jpg, .jpeg" />
+															<input type="hidden" name="imgdec" value="{{ product.prod_image_detail }}" class="ec-image-upload form-control" />
+														</label>
+														<label class="form-label">Product Image Details</label>
+														{% comment %} <input type='text' name="imgdec" id="thumbUpload06"
+																	class="ec-image-upload" value="{{ product.prod_image_detail }}"
+																	accept=".png, .jpg, .jpeg" /> {% endcomment %}
+													</div>
+													<div class="col-md-6" style=" margin:auto; ">
+														<label for="tagimg" class="image-picker">
+															<img src="{{ product.prod_tag.url }}" alt="Product Image" id="img1_preview" height="100px" width="100px" />
+															<input type="file" name="tagimg" id="tagimg" value="{{ product.prod_tag }}" class="ec-image-upload form-control" accept=".png, .jpg, .jpeg" />
+															<input type="hidden" name="tagimg" value="{{ product.prod_tag }}" class="ec-image-upload form-control" accept=".png, .jpg, .jpeg" />
+														</label>
+														<label class="form-label">Product Tags </label>
+														{% comment %} <input type='text' name="tagimg" id="thumbUpload06"
+																	class="ec-image-upload" value="{{ product.prod_tag }}"
+																	accept=".png, .jpg, .jpeg" /> {% endcomment %}
+													</div>
+													<div class="col-md-12">
+														<button type="submit" class="btn btn-primary">Submit</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+<script>
+	// JavaScript
+	document.getElementById('category-select-new').addEventListener('change', function () {
+		const category = this.value;
+		const subcategorySelect = document.getElementById('subcategory-select');
+
+		// Clear existing options
+		subcategorySelect.innerHTML = '<option value="0">Select Option</option>';
+
+		// Add new options based on selected category
+		if (category === 'Belt') {
+			subcategorySelect.innerHTML += `
+                <option value="Signature Belts">Signature Belts</option>
+                <option value="Reversible Belts">Reversible Belts</option>
+                <option value="Casual Belts">Casual Belts</option>
+                <option value="Formal Belts">Formal Belts</option>
+                <option value="Semi Formal Belts">Semi Formal Belts</option>
+                <option value="Braided/Ladies Belt">Braided/Ladies Belt</option>
+            `;
+		} else if (category === 'Purse') {
+			subcategorySelect.innerHTML += `
+                <option value="Wallets">Wallets</option>
+                <option value="Accessories">Accessories</option>
+            `;
+		} else if (category === 'Combo') {
+			subcategorySelect.innerHTML += `
+                <option value="Corporate Gifts">Corporate Gifts</option>
+            `;
+		}
+	});
+</script>
+{% endblock %}

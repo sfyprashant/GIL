@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .wishlistEmpty-container {
+    max-width: 980px;
+    margin: 130px auto 130px;
+    text-align: center;
+}
+.wishlistEmpty-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #282c3f;
+}
+.wishlistEmpty-info {
+    font-size: 18px;
+    color: #94989f;
+    max-width: 380px;
+    margin: 20px auto 0;
+}
+.wishlistEmpty-icon {
+    margin: 43px 0 50px;
+    display: inline-block;
+}
+</style>
+<style>
+    .form-btn {
+    font-weight: 800;
+    /* background: #4fc1f0 none repeat scroll 0 0; */
+    border: medium none;
+    border-radius: 5px;
+    color: #ebb30d;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    /* height: 42px; */
+    /* letter-spacing: 0.1em; */
+    line-height: 40px;
+    overflow: hidden;
+    /* padding: 0 30px; */
+    text-shadow: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+}
+</style>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<!-- Begin Page Banner Area -->
+<div class="page-banner product-page-banner">
+    <div class="container">
+        <div class="page-banner-content">
+            <!--<h2 class="text-light">GIL</h2>-->
+            <!--<ul>-->
+            <!--    <li><a href="/">Home</a></li>-->
+            <!--    <li class="active"><a href="#">Products</a></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+<!-- Page Banner Area End Here -->
+<!-- Begin Shop Topbar Wrapper Area -->
+<div class="shop-topbar-area shop-topbar-area-reverse pt-100 ">
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-3 order-1 order-lg-1">-->
+            <!--    <div class="shop-sidebar shop-sidebar-reverse">-->
+                    <!-- Shop Sidebar Area -->
+            <!--        <div class="category">-->
+            <!--            <h4>Categories</h4>-->
+                        <!-- Begin Category List Area -->
+            <!--            <div class="category-list">-->
+                            <!-- Add data-category attribute to identify the category for each link -->
+            <!--                <ul>-->
+            <!--                    <li><a href="#" data-category="all" class="product-category">All Products</a></li>-->
+            <!--                    <li><a href="#" data-category="belt" class="product-category">Leather Belts</a></li>-->
+            <!--                    <li><a href="#" data-category="purse" class="product-category">Leather Wallets &-->
+            <!--                            Accessories</a></li>-->
+            <!--                    <li><a href="#" data-category="combo" class="product-category">Combos</a></li>-->
+            <!--                </ul>-->
+
+            <!--            </div>-->
+                        <!-- Category List Area End Here -->
+            <!--        </div>-->
+                   
+                    <!-- Shop Sidebar Area End-->
+            <!--    </div>-->
+
+            <!--</div>-->
+            <div class="col-lg-12 order-2 order-lg-2 product-container">
+                 <div class="shop-topbar-wrapper shop-list-topbar-wrapper ">
+                    <!-- Begin Grid List Area -->
+                    <div class="col-lg-3 grid-list">
+                        <ul class="nav">
+                            <li>
+                                <a class="active show" data-bs-toggle="tab" href="#grid" title="Grid">
+                                    <i class="fa fa-th-large"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tab" href="#list" title="List">
+                                    <i class="fa fa-th-list"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                    <h2 style="text-align:center;">Leather Belts</h2></div>
+                    <!-- Grid List Area End Here -->
+                    <!---->
+                       <div class="col-lg-3 toolbar-short-area d-md-flex align-items-center">
+                            <div class="toolbar-shorter">
+                                <label>Sort By:</label>
+                                <form action="{% url 'product-short-belts' %}" method="get" id="sort-form">
+                                    <select class="nice-select wide" name="sort_by" onchange="document.getElementById('sort-form').submit()">
+                                        <option value="">Select</option>
+                                        <option value="price_asc">Price: Lowest first</option>
+                                        <option value="price_desc">Price: Highest first</option>
+                                    </select>
+                                    <input type="hidden" value="{{ category }}" name="cat">
+                                    <input type="hidden" value="{{ subcategory }}" name="subcat">
+                                </form>
+                            </div>
+                        </div>
+
+                    <!---->
+
+                </div>
+                <div class="shop-product product">
+                    <!-- Begin Tab Menu Content Area -->
+                    {% if products is not None and products %}
+                        <div class="tab-content" id="product-list">
+                            <div id="grid" class="tab-pane show fade in active">
+                                <div class="grid-view">
+                                    <div class="row">
+                                        {% for n in products %}
+                                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                                <!-- Begin Single Product Area -->
+                                                <div class="single-product single-product-3 product-item belt">
+                                                    <!-- Begin Product Image Area -->
+                                                    <div class="product-img">
+                                                        <a href="{% url 'product-details' n.id %}">
+                                                            <img class="primary-img" src="{{n.prod_image.url}}" alt="">
+                                                            <img class="secondary-img" src="{{n.prod_image_detail.url}}" alt="">
+                                                        </a>
+                                                        <!-- Begin Product Action Area -->
+                                                        <div class="product-action">
+                                                            <div class="product-action-inner">
+                                                                <div class="cart">
+                                                                    <a href="{% url 'add-to-cart' n.id %}">
+                                                                        <span>Add To Cart</span>
+                                                                    </a>
+                                                                </div>
+                                                                <ul class="add-to-links">
+                                                                    <li class="rav-wishlist">
+                                                                        <a href="{% url 'add-to-wishlist' n.id %}" data-bs-toggle="tooltip" title="Add To Wishlist">
+                                                                            <i class="fa fa-heart-o"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Product Action Area End Here -->
+                                                    </div>
+                                                    <!-- Product Image Area End Here -->
+                                                    <!-- Begin Product Content Area -->
+                                                    <div class="product-contents">
+                                                        <!-- Begin Product Name Area -->
+                                                        <h5 class="product-name">
+                                                            <a href="{% url 'product-details' n.id %}" title="{{n.product_name}}">{{n.product_name}}</a>
+                                                        </h5>
+                                                        <!-- Product Name Area End Here -->
+                                                        <!-- Begin Price Box Area -->
+                                                        <div class="price-box">
+                                                            <span class="price">₹{{n.discounted_price}}</span>
+                                                            <span class="old-price">₹{{n.selling_price}}</span>
+                                                        </div>
+                                                        <!-- Price Box Area End Here -->
+                                                        <!-- Begin Rating Area -->
+                                                        <div class="rating">
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                        </div>
+                                                        <!-- Rating Area End Here -->
+                                                    </div>
+                                                    <!-- Product Content Area End Here -->
+                                                </div>
+                                                <!-- Single Product Area End Here -->
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="list" class="tab-pane fade">
+                                <div class="list-view">
+                                    {% for n in belts %}
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4">
+                                                <!-- Begin Product Image Area -->
+                                                <div class="product-img pro-list-item pro-list-sidebar-items">
+                                                    <a href="{% url 'product-details' n.id %}">
+                                                        <img class="primary-img" src="{{n.prod_image.url}}" alt="">
+                                                        <img class="secondary-img" src="{{n.prod_image_detail.url}}" alt="">
+                                                    </a>
+                                                </div>
+                                                <!-- Product Image Area End Here -->
+                                            </div>
+                                            <div class="col-lg-8 col-md-8">
+                                                <!-- Begin Product List Content Area -->
+                                                <div class="pro-list-content">
+                                                    <!-- Begin Product Name Area -->
+                                                    <h5 class="product-name">
+                                                        <a href="{% url 'product-details' n.id %}" title="Printed Chiffon Dress">{{n.product_name}}</a>
+                                                    </h5>
+                                                    <!-- Product Name Area End Here -->
+                                                    <!-- Begin List Rating Area -->
+                                                    <div class="rating list-rating">
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </div>
+                                                    <!-- List Rating Area End Here -->
+                                                    <!-- Begin Price list Box Area -->
+                                                    <div class="price-box list-price-box">
+                                                        <span class="price">₹{{n.discounted_price}}</span>
+                                                        <span class="old-price">₹{{n.selling_price}}</span>
+                                                    </div>
+                                                    <!-- Price List Box Area End Here -->
+                                                    <!-- Begin List Text -->
+                                                    <div class="list-text  mb-3">
+                                                        {% if n.desc|length > 20 %}
+                                                            <p class="full-description">{{n.desc}}</p>
+                                                            <p class="short-description">{{ n.desc|slice:":200" }}<a href="{% url 'product-details' n.id %}"><span class="view-more form-btn">&nbsp;VIEW MORE...</span></a></p>
+                                                        {% else %}
+                                                            <p class="full-description">{{n.desc}}</p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- List Text End Here -->
+                                                    <!-- Begin Product Action Area -->
+                                                    <div class="product-action product-action-2">
+                                                        <div class="product-action-inner">
+                                                            <div class="cart">
+                                                                <a href="{% url 'add-to-cart' n.id %}">
+                                                                    <span>Add To Cart</span>
+                                                                </a>
+                                                            </div>
+                                                            <ul class="add-to-links">
+                                                                <li class="rav-wishlist"><a href="#" data-bs-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Action Area End Here -->
+                                                </div>
+                                                <!-- Product List Content Area End Here -->
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% if subcategory is none and not b2b %}
+                            <div class="wishlistEmpty-container">
+                                <div class="wishlistEmpty-heading"><h2>Coming Soon ......</h2></div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                        <!-- Tab Menu Content Area End Here -->
+                </div>
+                </div>
+            </div>
+             </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- Shop Topbar  Wrapper Area End Here -->
+<!-- jQuery script -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initial product list
+        var allProducts = $(".single-product-3");
+
+        // Handle category link click
+        $(".product-category").on("click", function (e) {
+            e.preventDefault();
+
+            // Get the selected category
+            var category = $(this).data("category");
+
+            // Filter products based on the selected category
+            if (category === "all") {
+                allProducts.show();  // Show all products
+            } else {
+                allProducts.hide();  // Hide all products
+                $("." + category).show();  // Show products of the selected category
+            }
+        });
+    });
+</script>
+
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<script>
+    $('.nav-item').on('click', function () {
+        const tabId = $(this).data('tab');
+        $('.tab-pane').removeClass('active');
+        $(`.tab-pane[data-tab="${tabId}"]`).addClass('active'); // Fix syntax here
+    });
+</script>
+
+
+
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the URL
+    let currentURL = window.location.href;
+
+    // Check if the URL contains the specific string
+    if (currentURL.includes("belts")) {
+        // Show the block
+        document.querySelector('.col-lg-3.toolbar-short-area.d-md-flex.align-items-center').style.display = 'block';
+    } else {
+        // Hide the block
+        document.querySelector('.col-lg-3.toolbar-short-area.d-md-flex.align-items-center').style.display = 'none';
+    }
+});
+
+</script>
+
+
+ <script>
+$(document).ready(function() {
+    // Hide all descriptions initially
+    $(".list-text .full-description").hide();
+
+    // Show more/less functionality
+    $(".view-more").click(function() {
+        var $this = $(this);
+        var $description = $this.prev(".full-description");
+
+        $description.toggle();
+        if ($description.is(":visible")) {
+            $this.text("View Less");
+        } else {
+            $this.text("View More");
+        }
+    });
+});
+
+</script>
+{% endblock %}

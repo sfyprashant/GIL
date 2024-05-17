@@ -1,0 +1,217 @@
+{% extends "adminpanel/admin-base.html" %}
+{% load static %}
+{% block content %}
+<style>
+		/* Define styles for each order status */
+	.status-label {
+		display: inline-block;
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-weight: bold;
+	}
+
+	.status-Pending {
+		background-color: #ffc107; /* Yellow */
+		color: #000; /* Black */
+	}
+
+	.status-Processing {
+		background-color: #17a2b8; /* Dark cyan */
+		color: #fff; /* White */
+	}
+
+	.status-Shipped {
+		background-color: #28a745; /* Green */
+		color: #fff; /* White */
+	}
+
+	.status-Delivered {
+		background-color: #007bff; /* Blue */
+		color: #fff; /* White */
+	}
+
+	.status-Canceled {
+		background-color: #dc3545; /* Red */
+		color: #fff; /* White */
+	}
+
+</style>
+
+			<!-- CONTENT WRAPPER -->
+		<div class="ec-content-wrapper">
+				<div class="content">
+					<!-- Top Statistics -->
+					<div class="row">
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-1">
+								<div class="card-body">
+									<h2 class="mb-1">{{ total_users }}</h2>
+									<p>Totel User</p>
+									<span class="mdi mdi-account-arrow-left"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-2">
+								<div class="card-body">
+									<h2 class="mb-1">{{ total_product }}</h2>
+									<p>Totel Product</p>
+									<span class="mdi mdi-account-clock"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-3">
+								<div class="card-body">
+									<h2 class="mb-1">{{ total_orders }}</h2>
+									<p>Totel Order</p>
+									<span class="mdi mdi-package-variant"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-4">
+								<div class="card-body">
+									<h2 class="mb-1">{{ total_review }}</h2>
+									<p>Total Review</p>
+									<span class="mdi mdi-star"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+						
+					<div class="row">
+						<div class="col-12 p-b-15">
+							<!-- Recent Order Table -->
+							<div class="card card-table-border-none card-default recent-orders" id="recent-orders">
+								<div class="card-header justify-content-between">
+									<h2>Recent Orders</h2>
+									<div class="date-range-report">
+										<span></span>
+									</div>
+								</div>
+								<div class="card-body pt-0 pb-5">
+									<table class="table card-table table-responsive table-responsive-large"
+										style="width:100%">
+										<thead>
+											<tr>
+												<th>Order ID</th>
+												<th>Product Name</th>
+												<th class="d-none d-lg-table-cell">Units</th>
+												<th class="d-none d-lg-table-cell">Order Cost</th>
+												<th>Status</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for i in latest_order_items %}
+											<tr>
+												<td>{{ i.id }}</td>
+												<td>
+													{{ i.product.product_name }}
+												</td>
+												<td class="d-none d-lg-table-cell">{{ i.quantity }}</td>
+												<td class="d-none d-lg-table-cell">{{ i.total_cost }}</td>
+												<td>
+													<span class="badge status-{{ i.order.status }}">{{ i.order.status }}</span>
+												</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-xl-6">
+							<!-- New Customers -->
+							<div class="card ec-cust-card card-table-border-none card-default">
+								<div class="card-header justify-content-between ">
+									<h2>New Customers</h2>
+									<!--<div>-->
+									<!--	<button class="text-black-50 mr-2 font-size-20">-->
+									<!--		<i class="mdi mdi-cached"></i>-->
+									<!--	</button>-->
+									<!--</div>-->
+								</div>
+								<div class="card-body pt-0 pb-15px">
+									<table class="table ">
+									    <thead>
+								<tr>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Item: activate to sort column ascending"
+										style="width: 29px;"><h6>Email</h6></th>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Name: activate to sort column ascending"
+										style="width: 43px;"><h6>Username</h6></th>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Order ID: activate to sort column ascending"
+										style="width: 134px;"><h6>Contact no.</h6></th>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Items: activate to sort column ascending"
+										style="width: 36px;"><h6>Reg. Date</h6></th>
+									
+								</tr>
+							</thead>
+										<tbody>
+											{% for i in latest_user %}
+											<tr>
+												<td>{{ i.user.user.username }}</td>
+												<td>{{ i.user.user.first_name }}</td>
+												<td>{{ i.user.mobile_no  }}</td>
+												<td class="text-dark d-none d-md-block">{{ i.user.dob }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<!-- New Products -->
+							<div class="card ec-cust-card card-table-border-none card-default">
+								<div class="card-header justify-content-between ">
+									<h2>New Products</h2>
+									<!--<div>-->
+									<!--	<button class="text-black-50 mr-2 font-size-20">-->
+									<!--		<i class="mdi mdi-cached"></i>-->
+									<!--	</button>-->
+									<!--</div>-->
+								</div>
+								<div class="card-body pt-0 pb-15px">
+									<table class="table ">
+									    <thead>
+								<tr>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Item: activate to sort column ascending"
+										style="width: 29px;"><h6>Product Name</h6></th>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Name: activate to sort column ascending"
+										style="width: 43px;"><h6>Category</h6></th>
+									<th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1"
+										colspan="1" aria-label="Order ID: activate to sort column ascending"
+										style="width: 134px;"><h6>Discounted Price</h6></th>
+									
+								</tr>
+							</thead>
+										<tbody>
+											{% for i in latest_product %}
+											<tr>
+												<td>{{ i.product_name }}</td>
+												<td>{{ i.category }}</td>
+												<td class="text-dark d-none d-md-block">{{ i.discounted_price }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div>
+		
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    .img-full img{
+    width: 100%;
+    box-shadow: 2px 2px 20px #00000082, 2px 2px 16px #00000052, -2px -2px 10px #00000029;
+    border-radius: 10px;
+    }
+</style>
+            <!-- Begin Page Banner Area -->
+            <div class="page-banner blog-page-banner">
+                <div class="container">
+                    <div class="page-banner-content">
+                        <!--<h2 class="text-light">GIL</h2>-->
+                        <!--<ul>-->
+                        <!--    <li><a href="index.html">Home</a></li>-->
+                        <!--    <li class="active"><a href="blog.html">Blog</a></li>-->
+                        <!--</ul>-->
+                    </div>
+                </div>
+            </div>
+            <!-- Page Banner Area End Here -->
+            <!-- Begin Blog Area -->
+            <div class="blog-area pt-100 pb-100">
+                <div class="container">
+                    <div class="row">
+                     
+                        <div class="col-lg-12 order-1 order-lg-2">
+                            <div class="blog-2-item">
+                                <div class="row">
+                                    <!-- Begin Blog Image Area -->
+                                    <div class="col-lg-5">
+                                        <div class="blog-image-2 img-full">
+                                            <a href="{% url 'blog1' %}">
+                                                <img src="{% static 'images/blog/1_1.jpg' %}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Image Area End Here -->
+                                    <!-- Begin Blog Post Area -->
+                                    <div class="col-lg-7">
+                                        <div class="blog-post-2">
+                                            <div class="post-info">
+                                                <header class="entry-header">
+                                                    <div class="post-date">
+                                                        <span class="month">July 6</span>
+                                                        <span class="month">2022</span>
+                                                    </div>
+                                                    <div class="post-meta">
+                                                        <h1 class="entry-title">
+                                                            <a href="blog-image-format.html">
+                                                                Men’s Guide on How to Choose the Perfect Leather Belt for Your Outfit </a>
+                                                        </h1>
+                                                    </div>
+                                                </header>
+                                                <!-- Begin Entry Summary Area -->
+                                                <div class="entry-summary">
+                                                    <p>One of the most impactful accessories in a man’s closet is his belt. It’s easy to purchase a belt. All you need to do is go to a department store, buy a black or brown leather strap, then pick out a shiny silver or golden buckle. If that’s all you need, that’s great. </p>
+                                                    <div class="read-more">
+                                                        <a href="{% url 'blog1' %}">Read More</a>
+                                                    </div>
+                                                </div>
+                                                <!-- Entry Summary Area End Here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Post Area End Here -->
+                                </div>
+                            </div>
+                            <div class="blog-2-item">
+                                <div class="row">
+                                    <!-- Begin Blog Image Area -->
+                                    <div class="col-lg-5">
+                                        <div class="blog-image-2 img-full">
+                                            <a href="{% url 'blog2' %}">
+                                                <img src="{% static 'images/blog/2_1.jpg' %}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Image Area End Here -->
+                                    <!-- Begin Blog Post Area -->
+                                    <div class="col-lg-7">
+                                        <div class="blog-post-2">
+                                            <div class="post-info">
+                                                <header class="entry-header">
+                                                  <div class="post-date">
+                                                        <span class="month">Sep 26</span>
+                                                        <span class="month">2022</span> 
+                                                    </div> 
+                                                    <div class="post-meta">
+                                                        <h1 class="entry-title">
+                                                            <a href="{% url 'blog2' %}">
+                                                                Know Your Leather Wallet
+
+                                                            </a>
+                                                        </h1>
+                                                    </div>
+                                                </header>
+                                                <!-- Begin Entry Summary Area -->
+                                                <div class="entry-summary">
+                                                    <p>If you look into your pocket right now, you are sure to find your leather wallet there. You can be carrying it in your front or back pocket, but it will be there. No matter what your job is, you will be using a wallet to carry your cash, cards, documents, etc.</p>
+                                                    <div class="read-more">
+                                                        <a href="{% url 'blog2' %}">Read More</a>
+                                                    </div>
+                                                </div>
+                                                <!-- Entry Summary Area End Here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Post Area End Here -->
+                                </div>
+                            </div>
+                            <div class="blog-2-item">
+                                <div class="row">
+                                    <!-- Begin Blog Image Area -->
+                                    <div class="col-lg-5">
+                                        <div class="blog-image-2 img-full">
+                                            <a href="{% url 'blog3' %}">
+                                                <img src="{% static 'images/blog/3_1.jpg' %}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Image Area End Here -->
+                                    <!-- Begin Blog Post Area -->
+                                    <div class="col-lg-7">
+                                        <div class="blog-post-2">
+                                            <div class="post-info">
+                                                <header class="entry-header">
+                                                     <div class="post-date">
+                                                        <span class="month">Sep 26</span>
+                                                        <span class="month">2022</span> 
+                                                    </div>
+                                                    <div class="post-meta">
+                                                        <h1 class="entry-title">
+                                                            <a href="{% url 'blog3' %}">
+                                                                Casual Leather Belts</a>
+                                                        </h1>
+                                                    </div>
+                                                </header>
+                                                <!-- Begin Entry Summary Area -->
+                                                <div class="entry-summary">
+                                                    <p>A belt is more than just about holding your pants and jeans at their place. It is about wearing the right type of belt with outfits. The occasion, the color, the thickness, all matter to making you look well turned out.</p>
+                                                    <div class="read-more">
+                                                        <a href="{% url 'blog3' %}">Read More</a>
+                                                    </div>
+                                                </div>
+                                                <!-- Entry Summary Area End Here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Blog Post Area End Here -->
+                                </div>
+                            </div>
+                           
+                            <!-- Begin Pagination Area -->
+                            <!-- <div class="product-pagination blog-pagination">
+                                <ul>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div> -->
+                            <!-- Pagination Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog Area End Here -->
+{% endblock %}

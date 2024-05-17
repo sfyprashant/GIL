@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhonePe Payment</title>
+</head>
+<body>
+    <h1>Initiate PhonePe Payment</h1>
+    <form action="{% url 'initiate_phonepe_payment' %}" method="POST">
+        {% csrf_token %}
+        <!-- Include necessary payment parameters as hidden inputs -->
+        <input type="hidden" name="amount" value="100.00">
+        <input type="hidden" name="orderId" value="12345">
+   
+        <!-- Add other necessary parameters here -->
+        <input type="submit" value="Pay with PhonePe">
+    </form>
+</body>
+</html>

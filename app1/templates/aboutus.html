@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inria Serif:wght@400&display=swap" />
+    <link rel="icon" type="image/jpg" href="./public/icon1.jpg">
+    
+    <style>
+      .block {
+        text-align: center;
+        margin-bottom: 20px; /* Adds spacing between blocks */
+        position: relative; /* Needed for absolute positioning of second image */
+      }
+    
+      .block img {
+        width: 100%;
+        max-width: 100%; /* Adjust image size */
+        height: auto;
+        margin-bottom: 10px; /* Adds spacing between images */
+      }
+    
+      .block .second-img {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
+      .block p {
+        margin-top: 10px;
+      }
+      .col-gap {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    </style>
+    <style>
+        .content-block {
+          background: #f9f9f9;
+          padding: 20px;
+          text-align: center;
+          border-radius: 20px;
+        }
+      </style>
+</head>
+
+<body>
+    <!-- Begin Page Banner Area -->
+            
+    <div class="page-banner about-us-page-banner">
+        <div class="container-fluid pl-60 pr-60">
+            <div class="page-banner-content">
+            <!--<h2 class="text-light">GIL</h2>-->
+                <!--<ul>-->
+                <!--    <li><a href="/">Home</a></li>-->
+                <!--    <li class="active"><a href="#">About Us</a></li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+    </div>
+    
+    <div class="about-area">
+        <div class="container-fluid">
+            <div class="row pt-20">
+                <div class="col-lg-12">
+                    <div class="child_pepzero ">
+                        
+                        <!-- <p>Est. 1994, in Kanpur, U.P. India, Manufacturer and Exporter of Leather. Leather Belts and Leather Goods.</p>
+                            <p> Our major export destinations are the <b>U.S.A, Germany, Australia, Greece, Dubai, Canada, UK.</b> We are a Socially Compliant Company with <b>SA 8000-Social Accountability Certification, Sedex.</b> Our entire business approach is centred around our valuable customers.</p>
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <h2 class="about-us-title pt-20">About Us</h2> -->
+            <div class="row align-items-center" >
+                
+                <div class="row align-items-center">
+                    <div class="col-lg-6 p-0">
+                        <!-- Begin About Image Area -->
+                        <div class="about-img">
+                            <img src="{{ about_us_data.image.url }}" alt="" >
+                        </div>
+                        <!-- About Image Area End Here -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Begin About Content Area -->
+                        <div class="about-us-content text-center">
+                            <h2 class=" text-left pb-20" style="text-transform: uppercase; text-align: center;">GrowMore International
+                                LTD.</h2>
+                            {% comment %} <h4 class=" text-left">{{ about_us_data.title }}</h4> {% endcomment %}
+                            <p class="about-us-para">{{ about_us_data.description }}</p>
+                            
+                        </div>
+                        <!-- Begin About Content Area -->
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-40 mb-60">
+                <div class="col-lg-10" style="margin: auto;">
+                    <div class="upvc-box2" id="one" style=" width: auto;  ">
+
+                        <div class="parent_pep">
+
+                            <div class="pep1">
+
+                                <div class="child_pepone">
+                                    <h2 style="text-decoration: underline;">REVERSIBLE/FEATHER EDGE BELTS</h2>
+                                    <p>Made from 100% Genuine Spanish Leather. This leather is breathable and wrinkle-free.
+                                        We procure this leather from LWG-certified Tannery.</p>
+                                </div>
+                                <div class="child_peptwo"> <img
+                                        src="{% static 'images/about-us/4.jpg' %}"
+                                        alt="" width="200px" height="200px"></div>
+                                <div class="child_pepthree"><img
+                                        src="{% static 'images/about-us/8.jpg' %}"
+                                        alt="" width="200px" height="200px"></div>
+                            </div>
+                            <div class="pep2">
+                                <div class="child_peptwo"> <img
+                                    src="{% static 'images/about-us/5.jpg' %}"
+                                    alt="" width="200px" height="200px"></div>
+                            <div class="child_pepthree"><img
+                                    src="{% static 'images/about-us/7.jpg' %}"
+                                    alt="" width="200px" height="200px"></div>
+
+                                <div class="child_pepone">
+                                    <h2 style="text-decoration: underline;">CASUAL JEANS LEATHER BELTS</h2>
+                                    <p>Casual Leather Belts made from 100% Genuine Bovine Leather.
+                                        The leather used meets EU/CPSAI Norms including REACH</p>
+                                </div>
+                                
+                            </div>
+                            <div class="pep3">
+                                <div class="child_pepone">
+                                    <h2 style="text-decoration: underline;">LEATHER WALLETS AND ACCESSORIES</h2>
+                                    <p>Leather Wallets made from 100% Genuine Bovine Leather by Skilled craftsmen.
+                                        The leather used meets EU/CPSAI Norms including REACH</p>
+                                </div>
+                                <div class="child_peptwo"> <img
+                                        src="{% static 'images/about-us/3.jpg' %}"
+                                        alt="" width="200px" height="200px"></div>
+                                <div class="child_pepthree"><img
+                                        src="{% static 'images/about-us/6.jpg' %}"
+                                        alt="" width="200px" height="200px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Banner Area End Here -->
+    <div class="container mb-20">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="content-block">
+              <img src="{% static 'images/about-us/11.png' %}" class="img-fluid" alt="Image 1">
+              <p class="pt-10">With an in-house sampling and testing team, we work continuously to improve ourselves and keep up with the latest trends</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="content-block">
+              <img src="{% static 'images/about-us/13.png' %}" class="img-fluid" alt="Image 2">
+              <p class="pt-10">We are equipped with modern Italian Machines and trained workers to cater to all kinds of customer needs.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="content-block">
+              <img src="{% static 'images/about-us/12.jpg' %}" class="img-fluid" alt="Image 3">
+              <p class="pt-10">From retailers to corporate clients, we cater to all customers according to their needs and specifications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="counterup-area">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin Raavin Counter Area -->
+                    <div class="raavin-counter white-smoke-bg">
+                        <div class="container">
+                            <div class="counter-img">
+                                <img src="{% static 'images/about-us/icon/1.png' %}" alt="">
+                            </div>
+                            <div class="counter-info">
+                                <div class="counter-number">
+                                    <h3 class="counter">2169</h3>
+                                </div>
+                                <div class="counter-text">
+                                    <span>HAPPY CUSTOMERS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Raavin Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin Raavin Counter Area -->
+                    <div class="raavin-counter gray-bg">
+                        <div class="counter-img">
+                            <img src="{% static 'images/about-us/icon/2.png' %}" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="counter">869</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>AWARDS WINNED</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Raavin Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin Raavin Counter Area -->
+                    <div class="raavin-counter white-smoke-bg">
+                        <div class="counter-img">
+                            <img src="{% static 'images/about-us/icon/3.png' %}" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="">24/7</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>CUSTOMER SUPPORT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Raavin Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin Raavin Counter Area -->
+                    <div class="raavin-counter gray-bg">
+                        <div class="counter-img">
+                            <img src="{% static 'images/about-us/icon/4.png' %}" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="counter">2169</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>DELIVERED ITEMS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Raavin Counter Area End Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var homeText = document.getElementById("homeText");
+        if (homeText) {
+            homeText.addEventListener("click", function (e) {
+                window.location.href = "./desktop-main.html";
+            });
+        }
+
+        var aboutUsText = document.getElementById("aboutUsText");
+        if (aboutUsText) {
+            aboutUsText.addEventListener("click", function (e) {
+                window.location.href = "about-us.html";
+            });
+        }
+
+        var portfolioText = document.getElementById("portfolioText");
+        if (portfolioText) {
+            portfolioText.addEventListener("click", function (e) {
+                window.location.href = "./portfolio.html";
+            });
+        }
+
+        var servicesText = document.getElementById("servicesText");
+        if (servicesText) {
+            servicesText.addEventListener("click", function (e) {
+                window.location.href = "./services.html";
+            });
+        }
+
+        var conatctText = document.getElementById("conatctText");
+        if (conatctText) {
+            conatctText.addEventListener("click", function (e) {
+                window.location.href = "./contact.html";
+            });
+        }
+
+        var button = document.getElementById("button");
+        if (button) {
+            button.addEventListener("click", function (e) {
+                window.location.href = "./book-a-call.html";
+            });
+        }
+
+        var homeText1 = document.getElementById("homeText1");
+        if (homeText1) {
+            homeText1.addEventListener("click", function (e) {
+                window.location.href = "./desktop-main.html";
+            });
+        }
+
+        var aboutUsText1 = document.getElementById("aboutUsText1");
+        if (aboutUsText1) {
+            aboutUsText1.addEventListener("click", function (e) {
+                window.location.href = "about-us.html";
+            });
+        }
+
+        var portfolioText2 = document.getElementById("portfolioText2");
+        if (portfolioText2) {
+            portfolioText2.addEventListener("click", function (e) {
+                window.location.href = "./portfolio.html";
+            });
+        }
+
+        var servicesText1 = document.getElementById("servicesText1");
+        if (servicesText1) {
+            servicesText1.addEventListener("click", function (e) {
+                window.location.href = "./services.html";
+            });
+        }
+
+        var contactText = document.getElementById("contactText");
+        if (contactText) {
+            contactText.addEventListener("click", function (e) {
+                window.location.href = "./contact.html";
+            });
+        }
+    </script>
+
+    <script>
+        // JavaScript to handle toggle functionality
+        const openBtn = document.querySelector('.open-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+
+        openBtn.addEventListener('click', () => {
+            sidebar.style.left = '0';
+            content.style.marginLeft = '250px';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.left = '250px';
+            content.style.marginLeft = '0';
+        });
+
+    </script>
+</body>
+
+</html>
+{% endblock %}

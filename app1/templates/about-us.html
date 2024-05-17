@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+            <!-- Begin Page Banner Area -->
+            
+            <div class="page-banner about-us-page-banner">
+                <div class="container-fluid pl-60 pr-60">
+                    <div class="page-banner-content">
+                    <!--<h2 class="text-light">GIL</h2>-->
+                        <!--<ul>-->
+                        <!--    <li><a href="/">Home</a></li>-->
+                        <!--    <li class="active"><a href="#">About Us</a></li>-->
+                        <!--</ul>-->
+                    </div>
+                </div>
+            </div>
+            <!-- Page Banner Area End Here -->
+            <!-- Begin About Area -->
+            <div class="about-area">
+                <div class="container-fluid">
+                    <h2 class="about-us-title pt-20">About Us</h2>
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 p-0">
+                            <!-- Begin About Image Area -->
+                            <div class="about-img">
+                                <img src="{{ about_us_data.image.url }}" alt="" >
+                            </div>
+                            <!-- About Image Area End Here -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- Begin About Content Area -->
+                            <div class="about-us-content text-center">
+                                
+                                {% comment %} <h4 class=" text-left">{{ about_us_data.title }}</h4> {% endcomment %}
+                                <p class="about-us-para">{{ about_us_data.description }}</p>
+                                
+                            </div>
+                            <!-- Begin About Content Area -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="counterup-area">
+                <div class="container-fluid p-0">
+                    <div class="row g-0">
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin Raavin Counter Area -->
+                            <div class="raavin-counter white-smoke-bg">
+                                <div class="container">
+                                    <div class="counter-img">
+                                        <img src="{% static 'images/about-us/icon/1.png' %}" alt="">
+                                    </div>
+                                    <div class="counter-info">
+                                        <div class="counter-number">
+                                            <h3 class="counter">2169</h3>
+                                        </div>
+                                        <div class="counter-text">
+                                            <span>HAPPY CUSTOMERS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Raavin Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin Raavin Counter Area -->
+                            <div class="raavin-counter gray-bg">
+                                <div class="counter-img">
+                                    <img src="{% static 'images/about-us/icon/2.png' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="counter">869</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>AWARDS WINNED</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Raavin Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin Raavin Counter Area -->
+                            <div class="raavin-counter white-smoke-bg">
+                                <div class="counter-img">
+                                    <img src="{% static 'images/about-us/icon/3.png' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="">24/7</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>CUSTOMER SUPPORT</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Raavin Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin Raavin Counter Area -->
+                            <div class="raavin-counter gray-bg">
+                                <div class="counter-img">
+                                    <img src="{% static 'images/about-us/icon/4.png' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="counter">2169</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>DELIVERED ITEMS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Raavin Counter Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- About Area End Here -->
+           
+            {% endblock %}

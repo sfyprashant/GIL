@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .wishlistEmpty-container {
+    max-width: 980px;
+    margin: 130px auto 130px;
+    text-align: center;
+}
+.wishlistEmpty-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #282c3f;
+}
+.wishlistEmpty-info {
+    font-size: 18px;
+    color: #94989f;
+    max-width: 380px;
+    margin: 20px auto 0;
+}
+.wishlistEmpty-icon {
+    margin: 43px 0 50px;
+    display: inline-block;
+}
+</style>
+
+    <!-- Begin Page Banner Area -->
+    <div class="page-banner cart-page-banner">
+        <div class="container">
+            <div class="page-banner-content">
+                <h2>GIL</h2>
+                <!--<ul>-->
+                <!--    <li><a href="/">Home</a></li>-->
+                <!--    <li><a href="#">Shop</a></li>-->
+                <!--    <li class="active"><a href="#0">Wishlist</a></li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+    </div>
+    <!-- Page Banner Area End Here -->
+    {% if messages %}
+                        {% for message in messages %}
+                            <div class="mass alert alert-{{ message.tags }} mt-5">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+    <!-- Wishlist Area Start -->
+    <div class="wishlist-area pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        {% if wishlist_items %}
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="raavin-product-remove">Remove</th>
+                                        <th class="raavin-product-thumbnail">Images</th>
+                                        <th class="cart-product-name">Product</th>
+                                        <th class="raavin-product-price">Unit Price</th>
+                                        <th class="raavin-product-stock-status">Stock Status</th>
+                                        <th class="raavin-product-add-cart">Add to Cart</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wishlist_item in wishlist_items %}
+                                        <tr>
+                                            <td class="raavin-product-remove">
+                                                <a href="{% url 'remove-from-wishlist' wishlist_item.id %}">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </td>
+                                            <td class="raavin-product-thumbnail">
+                                                <a href="{% url 'product-details' wishlist_item.id %}">
+                                                    <img src="{{ wishlist_item.product.prod_image.url }}" height="100px" width="100px" alt="">
+                                                </a>
+                                            </td>
+                                            <td class="raavin-product-name">
+                                                <a href="{% url 'product-details' wishlist_item.id %}">
+                                                    {{ wishlist_item.product.product_name }}
+                                                </a>
+
+                                            </td>
+
+                                            <td class="raavin-product-price">
+                                                <span class="amount">₹{{ wishlist_item.product.discounted_price }}</span>
+                                            </td>
+                                            <td class="raavin-product-stock-status">
+                                                <span class="in-stock">{{ wishlist_item.product.availability }}</span>
+                                            </td>
+                                            <td class="raavin-product-add-cart">
+                                                <a href="{% url 'add-to-cart' wishlist_item.id %}">Add to Cart</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+                        {% else %}
+                        <div><div class="wishlistEmpty-container">
+                            <div class="wishlistEmpty-heading">YOUR WISHLIST IS EMPTY</div>
+                            <div class="wishlistEmpty-info">Add items that you like to your wishlist. Review them anytime and easily move them to the bag.</div>
+                            <img src="{% static 'images/wishlist.png' %}">
+                            <div class="myntraweb-sprite wishlistEmpty-icon sprites-emptyIcon"></div><div><a class="form-button mt-2" href="{% url 'product' %}" class="wishlistEmpty-button">CONTINUE SHOPPING</a></div>
+                            </div>
+                            </div>
+                            <!--<p class="empty-cart-msg">Your wishlist is empty. <a href="{% url 'product' %}">Browse our products</a> and add items to your wishlist.</p>-->
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Wishlist Area End -->
+    
+{% endblock %}

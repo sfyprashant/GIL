@@ -1,0 +1,1384 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+<head>
+    <style>
+        *{
+            font-family:"Quattrocento Sans", sans-serif;
+        }
+        
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>GIL</title>
+    <meta name="description" content="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <!-- Material Design Iconic Font-V2.2.0 -->
+    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- Font Awesome Stars-->
+    <link rel="stylesheet" href="{% static 'css/fontawesome-stars.css' %}">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.css' %}">
+    <!-- Nivo Slider CSS -->
+    <link rel="stylesheet" href="{% static 'css/nivo-slider.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Jquery-ui CSS -->
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <!-- Venobox CSS -->
+    <link rel="stylesheet" href="{% static 'css/venobox.css' %}">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- Bootstrap V4.1.3 Fremwork CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&amp;display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link  href="{% static 'newcss/assets/css/plugins/swiper.min.css' %}" >
+    <link  href="{% static 'newcss/css/style.css' %}" >
+        <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" />
+    <!-- Modernizr js -->
+    <script src="{% static 'js/vendor/modernizr-3.11.2.min.js' %}"></script>
+
+<style>
+ .featured-pro-2 .carousel {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px 
+    } 
+    @media (max-width: 767px)
+{
+    .featured-pro-2 .carousel {
+        display: block;
+}
+ .view_btn{
+            margin-left: 30%;
+        }
+    
+}
+#loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f0e0e;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+/* HTML: <div class="loader"></div> */
+        #loader {
+           width: 120px;
+            height: 80px;
+            position: absolute;
+            top: 45%;
+            left: 45%;
+            margin-top: -30px;
+            margin-left: -30px;
+            background: url("static/images/menu/logo/logo3.png") no-repeat;
+            -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+            animation: sk-scaleout 1.5s infinite ease-in-out;
+
+        }
+
+        @-webkit-keyframes sk-scaleout {
+            0% {
+                -webkit-transform: scale(0);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sk-scaleout {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .owl-carousel.owl-drag .owl-item{
+                width: 292.274px ;
+        }
+            
+</style>
+<style>
+      
+.carousel-item {
+    position: relative;
+}
+@media (min-width: 1200px) and (max-width: 1500px)
+        {
+            .main-menu nav > ul > li {
+                margin-right: 25px;
+            }
+            .caption {
+            background-color: #F5F5F5;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 95%;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            opacity: 1;
+            transition: opacity 0.3s;
+            }
+        }
+@media (min-width: 1000px) and (max-width: 1200px)
+        {
+            .main-menu nav > ul > li {
+                margin-right: 25px;
+            }
+            .caption {
+            background-color: #F5F5F5;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 92%;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            opacity: 1;
+            transition: opacity 0.3s;
+            }
+        }
+        @media (max-width: 768px) {
+            .gallery-row {
+                grid-template-columns: repeat(2, 1fr);
+                /* Two columns for smaller screens */
+            }
+            .image-container {
+                text-align: center;
+                transition: transform 0.3s ease-in-out;
+                position: relative;
+                flex-wrap: wrap;
+                display: flex;
+                max-width: 98%;
+            }
+             .image-container img {
+                max-width: 100%;
+                height: auto;
+                aspect-ratio: 3 / 3;
+                border: 1px solid #ddd;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease-in-out;
+            }
+            .collection-list-section 
+            {
+                padding-left:0;
+                padding-right:0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-row {
+                grid-template-columns: repeat(1, 1fr);
+                /* One column for even smaller screens */
+            }
+            .image-container {
+                text-align: center;
+                transition: transform 0.3s ease-in-out;
+                position: relative;
+                flex-wrap: wrap;
+                display: flex;
+                max-width: 98%;
+            }
+             .image-container img {
+                max-width: 100%;
+                height: auto;
+                aspect-ratio: 3 / 3;
+                border: 1px solid #ddd;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease-in-out;
+            }
+            
+            .collection-list-section 
+            {
+                padding-left:0;
+                padding-right:0;
+            }
+        }
+
+        .row:before .gallery-row:before {
+            content: none;
+        }
+        .casual-collection .grid2
+        {
+            
+        }
+    </style>
+<style>
+/* Define the default link color */
+.main-menu ul li a {
+    color: black;
+}
+
+/* Define the active class style */
+.main-menu ul li.activee a {
+    color: #100f0f;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.signature img,
+.combo img {
+    height: 300px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+.casual img
+{
+    aspect-ratio: 5/2;
+    object-fit: contain;
+}
+</style>
+
+<style>
+    .slider-active .single-slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color:#ffffff;}
+    /*background: rgb(26 24 24 / 62%); */
+    /* opacity:0.5; Adjust the color and opacity here (RGBA values with alpha) 
+  }
+   /* Other styles for the slider */
+  .slider-active {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .single-slide {
+    position: relative;
+    height: auto; /* Adjust the height of the slider as needed */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+  }
+  
+ 
+</style>
+<style>
+
+/* Close button */
+.close {
+  color: #ffffff;
+    float: right;
+    font-size: 28px;
+    text-align: end;
+    font-weight: bold;
+    background: none;
+    opacity: 1;
+
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hr {
+        margin: 15px 0 0 0;
+    }
+</style>
+<style>
+    .slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide {
+    width: 100%;
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+}
+
+</style>
+
+    <style>
+        .bs-example {
+            margin: 20px;
+        }
+         
+        .modal-content iframe {
+            margin: 0 auto;
+            display: block;
+        }
+        /*.vidyard-player-embed*/
+        /*{*/
+        /*    max-height:500px;*/
+        /*}*/
+    </style>
+
+ <script>
+ document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+              document.getElementById("loader-container").style.display = "none";
+            }, 1500);
+          });
+
+  </script>
+</head>
+<body>
+
+    <div id="loader-container">
+        <div id="loader"></div>
+    </div>
+    
+    <div class="body-wrapper">
+        <!--<img class="half-round-rect2" alt="" src="{% static 'images/public/half-round-rect.png' %}">-->
+        <!-- Begin Header Area -->
+                <header>
+            <!-- Begin Main Header Area -->
+            <div class="main-header stick header-sticky">
+                <div class="container-fluid pl-60 pr-60">
+                    <div class="row">
+                        <!-- Begin Logo Area -->
+                        <div class="col-lg-3 d-none d-lg-block  col-md-6 col-2">
+                            
+                            <div class="main-menu mt-5">
+                                <nav class="nav">
+                                    <ul>
+                                        <!--<li>-->
+                                        <!--    <a href="/">-->
+                                        <!--        <i class="fa-solid fa-magnifying-glass"></i>-->
+                                        <!--    </a>-->
+                                        <!--</li>-->
+                                                                                  
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- Logo Area End Here -->
+                        <!-- Begin Main Menu Area -->
+                      
+                        <div class="col-lg-6 d-lg-block d-xl-block col-2">
+                            <div class="logo">
+                                <nav class="">
+                                    <img src="{% static 'images/menu/logo/logo3.png' %}" alt="logo" height="80px" width="auto">
+                                </nav>
+                            </div>
+                        </div>
+
+                        
+                        
+                        <!-- Main Menu Area End Here -->
+                        <!-- Begin Header Right Area -->
+                                                <div class="col-lg-3 col-md-6 col-10 pl-20">
+                            <div class="header-right">
+                                <!-- Begin User Account Area -->
+                                <div class="main-menu primary-menu">
+                                    <nav>
+                                        <ul>
+                                            {% if request.user.is_authenticated %}
+                                            <li style="" ><a href="#"><img class="shopping-cart-2-shopping-cart-icon" title="Login" loading="lazy" alt="" src="{% static 'images/public/user.png' %}" height="26px" width="26px">&nbsp;&nbsp;Hello, {{request.user.first_name}}</a>
+                                                <ul class="dropdown primary-dropdown">
+                                                    <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i>My
+                                                            Account</a></li>
+                                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Logout</a></li>
+                                                </ul>
+                                            </li>
+                                            {% else %}
+                                            <li><a href="{% url 'accounts/login/' %}"><img class="shopping-cart-2-shopping-cart-icon" loading="lazy" alt="" src="{% static 'images/public/user.png' %}" height="26px" width="26px"></a></li>
+                                    {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- User Account Area End Here -->
+                                <!-- Begin Header Search Area -->
+                                <div class="main-menu primary-menu">
+                                    <nav>
+                                        <ul>
+                                            <li>
+                                                <a href="{% url 'shopping_cart' %}">
+                                                    <!--<i class="fa-solid fa-cart-shopping"></i>Cart-->
+                                                    <img class="shopping-cart-2-shopping-cart-icon" loading="lazy" alt="" src="{% static 'images/public/shopping-cart.png' %}" height="26px" width="26px">
+                                                    <span>{% if cart_items %}({{ cart_items|length }}){% endif %}</span>
+                                                </a>
+                                                <!-- Check if cart items exist before rendering the dropdown -->
+                                                {% if cart_items %}
+                                                <ul class="dropdown cart-dropdown">
+                                                    {% for cart_item in cart_items|slice:":2" %}
+                                                    <li>
+                                                        <!-- Begin Cart Item Area -->
+                                                        <div class="cart-item">
+                                                            <!-- Begin Cart Image Area -->
+                                                            <div class="cart-img">
+                                                                <a href="#">
+                                                                    <img src="{{ cart_item.product.prod_image.url }}" alt="{{ cart_item.product.product_name }}" height="50px" width="50px">
+                                                                </a>
+                                                            </div>
+                                                            <!-- Begin Product Item Area -->
+                                                            <div class="pro-item">
+                                                                <span class="quantity-formated">{{ cart_item.quantity }}X</span>
+                                                                <a class="pro-name" href="#" title="{{ cart_item.product.product_name }}">
+                                                                    {{ cart_item.product.product_name }}
+                                                                </a>
+                                                            </div>
+                                                            <!-- Product Item Area End Here -->
+                                                            <!-- Cart Image Area End Here -->
+                                                            <!-- Begin Cart Information Area -->
+                                                            <div class="cart-info">
+                                                                <!-- Begin Product Price Area -->
+                                                                <div class="pro-price">
+                                                                    <span>₹{{ cart_item.product.discounted_price }}</span>
+                                                                </div>
+                                                                <!-- Product Price Area End Here -->
+                                                                <!-- Begin Remove Link Area -->
+                                                                <div class="remove-link">
+                                                                    <a href="{% url 'delete_cart_item' cart_item.product.id %}" title="Remove this product from my cart"><i class="fa-solid fa-xmark"></i></a>
+                                                                </div>
+                                                                <!-- Remove Link Area End Here -->
+                                                            </div>
+                                                            <!-- Cart Information Area End Here -->
+                                                        </div>
+                                                        <!-- Cart Item Area End Here -->
+                                                    </li>
+                                                    {% endfor %}
+                                                    <!-- Add other cart items here -->
+                                                    <!-- Begin Cart Inner Bottom Area -->
+                                                    <div class="cart-inner-bottom">
+                                                        <div class="cart-btn">
+                                                            <a class="links links-3 text-white" href="{% url 'shopping_cart' %}">View More <i class="fa-solid fa-angles-right text-white"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Cart Inner Bottom Area End Here -->
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                                <!-- Header Search Area End Here -->
+                                
+                                <!-- Begin Mini Cart Area -->
+                                 <div class="main-menu primary-menu">
+                                    <nav>
+                                        <ul>
+                                            <li>
+                                                <a href="{% url 'wishlist' %}">
+                                                    <!--<i class="fa-solid fa-heart"></i>Wishlist-->
+                                                    <img class="shopping-cart-2-shopping-cart-icon" loading="lazy" alt="" src="{% static 'images/public/heart.png' %}" height="26px" width="26px">
+                                                    
+                                                    <span>{% if wishlist_items_count %}({{ wishlist_items_count }}){% endif %}</span>
+                                                </a>
+                                                <!-- Check if wishlist items exist before rendering the dropdown -->
+                                                {% if wishlist_items_count %}
+                                                <ul class="dropdown cart-dropdown">
+                                                    {% for item in wishlist_items|slice:":2" %}
+                                                    <li>
+                                                        <!-- Begin Cart Item Area -->
+                                                        <div class="cart-item">
+                                                            <!-- Begin Cart Image Area -->
+                                                            <div class="cart-img">
+                                                                <a href="{% if item.product.id %}{% url 'product-details' item.product.id %}{% endif %}">
+                                                                    <img src="{{ item.product.prod_image.url }}" alt="{{ item.product.product_name }}" height="50px" width="50px">
+                                                                </a>
+                                                            </div>
+                                                            <!-- Cart Image Area End Here -->
+                                                            <!-- Begin Product Item Area -->
+                                                            <div class="pro-item">
+                                                                <span class="quantity-formated">{{ item.product.quantity }}</span>
+                                                                <a class="pro-name" href="{% if item.id %}{% url 'product-details' item.id %}{% endif %}" title="{{ item.product_name }}">
+                                                                    {{ item.product.product_name }}
+                                                                </a>
+                                                            </div>
+                                                            <!-- Product Item Area End Here -->
+                                                            <!-- Begin Cart Information Area -->
+                                                            <div class="cart-info">
+                                                                <!-- Begin Product Atributes Area -->
+                                                                <div class="pro-atributes">
+                                                                    <a href="#" title="Product Detail">{{ item.product.availability }}</a>
+                                                                </div>
+                                                                <!-- Product Atributes Area End Here -->
+                                                                <!-- Begin Remove Link Area -->
+                                                                <div class="remove-link">
+                                                                    <a href="{% url 'remove-from-wishlist' item.product.id %}" title="Remove this product from wishlist"><i class="fa-solid fa-xmark"></i><a>
+                                                                </div>
+                                                                <!-- Remove Link Area End Here -->
+                                                            </div>
+                                                            <!-- Cart Information Area End Here -->
+                                                        </div>
+                                                        <!-- Cart Item Area End Here -->
+                                                    </li>
+                                                    {% endfor %}
+                                                    <!-- Add other wishlist items here -->
+                                                    <!-- Begin Cart Inner Bottom Area -->
+                                                    <div class="cart-inner-bottom">
+                                                        <div class="cart-btn">
+                                                            <a class="links links-3 text-white" href="{% url 'wishlist' %}">View More<i class="fa-solid fa-angles-right text-white"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Cart Inner Bottom Area End Here -->
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <!-- Header Right Area End Here -->
+                        <!-- Begin Mobile Menu Area -->
+                        <div class="mobile-menu-area d-lg-none d-xl-none col-12">
+                            <div class="mobile-menu">
+                                <nav>
+                                    <ul>
+                                        <li class="active"><a href="/">Home</a> </li>
+                                        <li class="active"><a href="{% url 'about_us' %}">About</a> </li>
+                                        <li class="activee"><a href="{% url 'belts' %}">Leather Belts</a>
+                                            <!-- Begin Dropdown Menu Area -->
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'belts' %}">All Leather Belts </a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Signature Belts' %}">Signature and Formal Belt</a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Casual Belts' %}">Casual Belt</a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Ladies Belts' %}">Ladies Belt</a></li>
+                                                 <!--<li><a href="{% url 'belts' category='Belt' subcategory='Reversible Belts' %}">Reversible Belt</a></li>-->
+                                            </ul>
+                                            <!-- Dropdown Menu Area End Here -->
+                                        </li>
+                                        <li class="activee"><a href="{% url 'product' category='Purse' %}">Leather Wallets & Combo</a>
+                                            <!-- Begin Dropdown Menu Area -->
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'wallets' category='Purse' subcategory='Wallets' %}">Leather Wallets</a></li>
+                                                <li><a href="{% url 'accessories' category='Purse' subcategory='Accessories' %}">Accessories</a></li>
+                                                <li><a href="{% url 'corporate-gift' category='Combo' subcategory='Corporate Gifts' %}">Combo</a></li>
+                                            </ul>
+                                            <!-- Dropdown Menu Area End Here -->
+                                        </li>
+                                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                                      
+                                               
+
+                                        <li>
+                                            <a href="{% url 'contact-us' %}">Contact Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'belts' category='Belt' subcategory='Under799' %}">Under 799</a>
+                                        </li>
+                                         
+                                        <!--<li class="activee"><a href="{% url 'videos' %}">Videos</a></li>-->
+                                        <li>
+                                            <a href="{% url 'B2B' %}">B2B</a>
+                                            <ul class="dropdown">
+                                                    <li><a href="{% url 'B2B' %}">All Products</a></li>
+                                                <li><a href="{% url 'B2B-Belts' %}">Leather Belts</a></li>
+                                                <li><a href="{% url 'b2b-wallets' category='Purse' subcategory='Wallets' %}">Leather Wallets &amp; Accessories</a></li>
+                                                <li><a href="{% url 'b2b-corporate-gift' %}">Corporate Gifting</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu Area End Here -->
+                    </div>
+                    <div class="row">
+                         <div class="col-lg-10 d-none d-lg-block d-xl-block" style="margin:auto;">
+                            <div class="main-menu mt-3">
+                                <nav class="nav">
+                                    <ul>
+                                        <li {% if request.path == '/' %} class="activee"{% endif %}><a href="/">Home</a></li>
+                                        <li {% if request.path == '/about_us' %} class="activee"{% endif %}><a href="{% url 'about_us' %}">About Us</a></li>
+                                        <!--<li {% if request.path == '/product' %} class="activee"{% endif %}><a href="{% url 'product' %}">Product</a>-->
+                                        <!--        <ul class="dropdown1 primary-dropdown">-->
+                                        <!--            <li><a href="{% url 'belts' %}">Leather Belts</a></li>-->
+                                        <!--            <li><a href="{% url 'wallets' %}">Leather Wallets &amp; Accessories</a></li>-->
+                                        <!--            <li><a href="{% url 'corporate-gift' %}">Corporate Gifting</a></li>-->
+                                        <!--        </ul>-->
+                                                
+                                        <!--</li>-->
+                                        <li {% if request.path == '/product-belts' %} class="activee"{% endif %}><a href="{% url 'product-belts' %}">Leather Belts &nbsp;<i class="fa-solid fa-angle-down"></i></a>
+                                            <!-- Begin Dropdown Menu Area -->
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'product-belts' %}">All Leather Belts </a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Signature Belts' %}">Signature and Formal Belt</a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Casual Belts' %}">Casual Belt</a></li>
+                                                <li><a href="{% url 'belts' category='Belt' subcategory='Ladies Belts' %}">Ladies Belt</a></li>
+                                                <!--<li><a href="{% url 'belts' category='Belt' subcategory='Reversible Belts' %}">Reversible Belt</a></li>-->
+                                            </ul>
+                                            <!-- Dropdown Menu Area End Here -->
+                                        </li>
+                                        <li {% if request.path == '/wallets' %} class="activee"{% endif %}><a href="{% url 'wallets' %}">Leather Wallets & Combo &nbsp;<i class="fa-solid fa-angle-down"></i></a>
+                                            <!-- Begin Dropdown Menu Area -->
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'wallets' category='Purse' subcategory='Wallets' %}">Leather Wallets</a></li>
+                                                <li><a href="{% url 'accessories' category='Purse' subcategory='Accessories' %}">Accessories</a></li>
+                                                <li><a href="{% url 'corporate-gift' category='Combo' subcategory='Corporate Gifts' %}">Combo</a></li>
+                                            </ul>
+                                            <!-- Dropdown Menu Area End Here -->
+                                        </li>
+                                        <li {% if request.path == '/blog' %} class="activee"{% endif %}><a href="{% url 'blog' %}">Our Blog</a></li>
+                                        <li {% if request.path == '/contact-us' %} class="activee"{% endif %}><a href="{% url 'contact-us' %}">Contact Us</a></li>
+                                        <li {% if request.path == '/belts/Belt/Under799/' %} class="activee"{% endif %}><a href="{% url 'belts' category='Belt' subcategory='Under799' %}">Under 799</a>
+                                        <!--<li {% if request.path == '/B2B/' %} class="activee"{% endif %}><a href="{% url 'B2B' %}">B2B</a>-->
+                                        <!--<li {% if request.path == '/videos' %} class="activee"{% endif %}><a href="{% url 'videos' %}">Videos</a>-->
+                                        
+                                        <li {% if request.path == '/B2B/' %} class="activee"{% endif %}><a href="{% url 'B2B' %}">B2B &nbsp;<i class="fa-solid fa-angle-down"></i></a>
+                                            <!-- Begin Dropdown Menu Area -->
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'B2B' %}">All Products</a></li>
+                                                <li><a href="{% url 'B2B-Belts' %}">Leather Belts</a></li>
+                                                <li><a href="{% url 'B2B-Wallets' %}">Leather Wallets &amp; Accessories</a></li>
+                                                <li><a href="{% url 'b2b-corporate-gift' %}">Corporate Gifting</a></li>
+                                            </ul>
+                                            <!-- Dropdown Menu Area End Here -->
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Main Header Area End Here -->
+        </header>
+        <hr>
+                        
+        <!-- Header Area End Here -->
+
+                        <!-- Begin Slider Area -->
+    <!--       <div class="slider-area">-->
+    <!--            {% for n in homeBannerData  %}-->
+    <!--            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">-->
+    <!--              <div class="carousel-inner">-->
+    <!--                <div class="carousel-item active" data-bs-interval="4000">-->
+    <!--                  <img src="{{n.homebannerimg.url}}" class="d-block w-100" alt="...">-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </div>-->
+                
+    <!--             {% endfor %}-->
+    <!--            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">-->
+    <!--                <div class="carousel-inner">-->
+    <!--                  <div class="carousel-item" data-bs-interval="4000">-->
+    <!--                    <img src="{% static 'images/banner/banner-wallets.webp' %}" class=" w-100" alt="banner-wallets.webp">-->
+    <!--                  </div>-->
+    <!--                  <div class="carousel-item" data-bs-interval="4000">-->
+    <!--                    <img src="{% static 'images/banner/Signature_Combos.webp' %}" class=" w-100" alt="Signature_Combos.webp">-->
+    <!--                  </div>-->
+    <!--                  <div class="carousel-item active" data-bs-interval="4000">-->
+    <!--                    <img src="{% static 'images/banner/Casual_Belts.webp' %}" class=" w-100" alt="Casual_Belts.webp">-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">-->
+    <!--                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+    <!--                  <span class="visually-hidden">Previous</span>-->
+    <!--                </button>-->
+    <!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">-->
+    <!--                  <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+    <!--                  <span class="visually-hidden">Next</span>-->
+    <!--                </button>-->
+    <!--              </div>-->
+    <!--            <div class="slider-active slider-active-2 owl-carousel">-->
+    <!--                {% for n in homeBannerData  %}-->
+    <!--                <div class="single-slide align-center animation-style-02 bg-4" style="background-image: url('{{n.homebannerimg.url}}'); background-size:contain;">-->
+    <!--                    <div class="slider-progress"></div>-->
+    <!--                    <div class="container">-->
+    <!--                        <div class="slider-content-2 slider-content-2_1">-->
+    <!--                            <h3 class="text-light">{{n.offertag}}</h3>-->
+    <!--                           <h1 class="text-light">{{n.title}}</h1>-->
+    <!--                            <div class="slider-icon">-->
+    <!--                                <img class="img-slide" src="{{n.headerimg.url}}" alt="" >-->
+    <!--                            </div> -->
+                                
+    <!--                            <p class="text-light">{{n.subtitle}}</p>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                {% endfor %}-->
+    <!--                 Single Slide Area End Here -->
+    <!--            </div>-->
+    <!--            <div class="row header-top mt-50">-->
+    <!--                <div class="col-lg-8">-->
+    <!--                    <div class="header-margin">-->
+    <!--                        <h1 class="header-h1">Unveiling, the<br> allure of leather !</h1>-->
+    <!--                        <h5 class="header-h5">From stylish belts to functional wallets, the inherent<br>beauty of leather accessories transcends trends,<br>-->
+    <!--                        making a lasting statement that stands the test of time.</h5>-->
+    <!--                        <div class="horizontal-line">-->
+    <!--                          <a class="rectangle-group" href="{% url 'product' %}">-->
+    <!--                            <div class="frame-item"></div>-->
+    <!--                            <div class="shop-now">Shop Now</div>-->
+    <!--                          </a>-->
+    <!--                          <div class="rs-button-nodes">-->
+    <!--                              <div class="buy-now-buttons play_video"  style="cursor: pointer;">-->
+    <!--                                <div class="new-arrivals-text-parent">-->
+    <!--                                  <div class="new-arrivals-text"></div>-->
+    <!--                                  <img class="frame-inner" loading="lazy" alt="grow more" src="{% static 'images/public/polygon-1.svg' %}">-->
+    <!--                                </div>-->
+    <!--                              </div>-->
+    <!--                              <div class="play-video" style="font-family: var(--font-inter);">Play Video</div>-->
+    <!--                          </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="col-lg-4">-->
+    <!--                    <div class="wrapper-rs-button-node">-->
+    <!--                        <img class="rs-button-node" alt="" src="{% static 'images/public/rs-button-node.webp' %}">-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div id="myModal" class="modal">-->
+    <!--              <div class="modal-content">-->
+    <!--                <span class="close">&times;</span>-->
+    <!--                 Embedded video -->
+    <!--                <iframe class ="youtube_play" src="https://www.youtube.com/embed/6VKIEdd9D1M?si=GWElXB85p1DYe70W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+    <!--              </div>-->
+    <!--            </div>-->
+                
+    <!--<div id="myModal" class="modal" style="background:#0000008f;">-->
+    <!--    <div class="modal-dialog">-->
+    <!--        <div class="modal-content">-->
+    <!--            <div class="modal-header">-->
+    <!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+    <!--            </div>-->
+    <!--            <div class="modal-body">-->
+    <!--                <iframe class ="youtube_play" src="https://www.youtube.com/embed/6VKIEdd9D1M?si=GWElXB85p1DYe70W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+                
+    <!--        </div>-->
+           <div class="desktop-slider">
+                           <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                <div class="carousel-item active " data-bs-interval="4000">
+                                    <img src="{% static 'images/banner/banner-wallets.webp' %}"  class=" w-100" alt="kiiandka">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="4000">
+                                    <img src="{% static 'images/banner/Signature_Combos.webp' %}"  class=" w-100" alt="kiiandka">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="4000">
+                                    <img src="{% static 'images/banner/Casual_Belts.webp' %}"  class=" w-100" alt="kiiandka">
+                                </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                    </div>
+            <!-- Slider Area End Here -->
+
+            
+
+<!--test start-->
+
+<!--test end-->
+
+            <!--Amitesh start-->
+            <section class="collection-list-section mt-90 pl-50 pr-50">
+                <div class="pos-title pos-title-2 mb-5">
+                    <h3>EXPLORE OUR WORLD</h3>
+        
+                </div>
+                <div class="row gallery">
+                    <div class="gallery-row" style="content:none;">
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'belts' category='Belt' subcategory='Signature Belts' %}">
+                                <img src="{% static 'images/home-header/Signaturel.png' %}" alt="">
+                                 <div class="caption">
+                                    <h3>Signature and Formal Belts</h3>
+                                    <!--<p>Image 1 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                            </a>
+                           
+                        </div>
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'belts' category='Belt' subcategory='Casual Belts' %}">
+                                <img src="{% static 'images/home-header/Casual.png' %}" alt="">
+                                <div class="caption">
+                                    <h3>Casual Belts </h3>
+                                    <!--<p>Image 1 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                                </div>
+                            </a>
+                        </div>
+        
+                        <!--Add more image containers as needed -->
+        
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'belts' category='Belt' subcategory='Under799' %}">
+                                <img src="{% static 'images/home-header/under799.jpg' %}" alt="">
+                                <div class="caption">
+                                    <h3>Under 799 </h3>
+                                    <!--<p>Image 2 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                                </div>
+                            </a>
+                        </div>
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'wallets' category='Purse' subcategory='Wallets' %}">
+                                <img src="{% static 'images/home-header/Wallets.png' %}" alt="">
+                                <div class="caption">
+                                    <h3>Leather Wallet </h3>
+                                    <!--<p>Image 3 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                                </div>
+                            </a>
+                        </div>
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'belts' category='Belt' subcategory='Ladies Belt' %}">
+                                <img src="{% static 'images/home-header/Ladies.png' %}" alt="">
+                                <div class="caption">
+                                    <h3>Ladies Belt</h3>
+                                    <!--<p>Image 1 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                                </div>
+                            </a>
+                        </div>
+                        <div class="image-container mt-4">
+                            <a class="image-caption" href="{% url 'corporate-gift' category='Combo' subcategory='Corporate Gifts' %}">
+                                <img src="{% static 'images/home-header/Combos.png' %}" alt="">
+                                <div class="caption">
+                                    <h3>Combo</h3>
+                                    <!--<p>Image 3 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                                </div>
+                            </a>
+                        </div>
+                        <!--Add more image containers as needed -->
+                    </div>
+                </div>
+            </section>
+             <!--Amitesh end -->
+
+
+             <section class="featured-pro featured-pro-2 pt-40 ">
+                 
+                <div class="container-fluid pl-60 pr-60">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Featured Product Title Area -->
+                            <div class="pos-title pos-title-2 mb-5">
+                                <h3>FEATURED COLLECTION</h3>
+                                <!--<p>Leather Belt is a must-have accessory. Your wardrobe remains incomplete without a set of-->
+                                <!--    high-quality leather belts. </p>-->
+    
+                            </div>
+                            <!-- Featured Product Title Area End Here -->
+                            <!-- Begin Group Content Area -->
+                            <div class="carousel-container mt-5">
+    
+                               <div class="carousel">
+                                    {% for n in products|slice:":8" %}
+                                    <!-- Begin Single Featured Product Area -->
+                                    <div class="single-product single-featured-pro-2">
+                                        <!-- Begin Product Image Area -->
+                                        <div class="product-img">
+                                            <a href="{% url 'product-details' n.id %}">
+                                                <img class="primary-img" src="{{n.prod_image.url}}" alt="">
+                                                <img class="secondary-img" src="{{n.prod_image_detail.url}}" alt="">
+                                            </a>
+                                            <!-- Begin Product Action Area -->
+                                            <div class="product-action">
+                                                <div class="product-action-inner">
+                                                    <div class="cart">
+                                                        <a href="{% url 'add-to-cart' product_id=n.id %}">
+                                                            <span>Add To Cart</span>
+                                                        </a>
+                                                    </div>
+                                                    <ul class="add-to-links">
+                                                        <li class="rav-wishlist"><a href="{% url 'add-to-wishlist' n.id %}" data-bs-toggle="tooltip"
+                                                                title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- Product Action Area End Here -->
+                                        </div>
+                                        <!-- Product Image Area End Here -->
+                                        <!-- Begin Product Content Area -->
+                                        <div class="product-contents">
+                                            <!-- Begin Product Name Area -->
+                                            <h5 class="product-name">
+                                                <a href="{% url 'product-details' n.id %}" title="{{n.product_name}}">{{n.product_name}}</a>
+                                            </h5>
+                                            <!-- Product Name Area End Here -->
+                                            <!-- Begin Price Box Area -->
+                                            <div class="price-box">
+                                                <span class="price">₹{{n.discounted_price}}</span>
+                                                <span class="old-price">₹{{n.selling_price}}</span>
+                                            </div>
+                                            <!-- Price Box Area End Here -->
+                                            <!-- Begin Rating Area -->
+                                            <div class="rating">
+                                                <p>{{n.availability}}</p>
+                                                <div class="stars">
+                                                    {% for i in 1..5 %}
+                                                    {% if average_rating >= i %}
+                                                    <i class="fas fa-star"></i>
+                                                    {% else %}
+                                                    <i class="far fa-star"></i>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <!-- Rating Area End Here -->
+                                        </div>
+                                        <!-- Product Content Area End Here -->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                            <a class="form-button view_btn" href="{% url 'product' %}"><span>View More</span></a>
+                            <!-- Group Content Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Porduct Section End Here -->
+            <!-- Begin Featured Porduct Section -->
+            <!-- your_template.html -->
+
+             <section class="featured-pro featured-pro-2">
+                 <div class="pos-title pos-title-2 mb-5">
+                    <h3>Our Premium Collection- The Wrinkle-free Spanish Leather Belts.</h3>
+                    <p class="pl-40 pr-40">Indulge in the epitome of sophistication with our premium leather belts meticulously crafted from imported Spanish leather. Imbued with a timeless elegance, these belts boast a wrinkle-free finish that ensures a perpetually polished look. Each belt exudes a classic charm, seamlessly complementing any attire with its refined simplicity. Luxuriously soft to the touch, the Spanish leather not only promises durability but also radiates opulence, making every accessory a statement piece. Elevate your ensemble with these distinguished belts, where quality, craftsmanship, and style converge to redefine sophistication.</p>
+                </div>
+                <div class="container-fluid pl-40 pr-40">
+                    <div class="row casual-collection">
+                        <!-- <div class="col-lg-8 grid1">-->
+                        <!--    <img class="grid2_img2" src="{% static 'videos/half-round-rect2.png' %}">-->
+                            
+                        <!--</div> -->
+                        <div class="col-lg-8 grid1">
+                            <!--<video id="myVideo" class="reversible_belt" src="{% static 'videos/gil.mp4' %}" loop muted playsinline alt="Reversible_Belt" style="width: 100%; height: auto; object-fit: cover;"></video>-->
+                        <!--<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/931934316?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="gil"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>-->
+                         <div style="position:relative;"><img style="width: 100%; margin: auto; display: block;" class="vidyard-player-embed" src="https://play.vidyard.com/RUVRFBc8MXt1QUAosTQKar.jpg" data-uuid="RUVRFBc8MXt1QUAosTQKar" data-v="4" data-type="inline"/></div><script src="https://player.vimeo.com/api/player.js"></script></div>
+
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div style="position: relative; display: inline-block;">
+                                        <img class="grid2_img1" src="/static/images/index/gil.jpg" width="100%">
+                                        <!--<div style="position: absolute; top: 90%; right: -23%; transform: translate(-50%, -50%);  padding: 10px;">-->
+                                        <!--    <a href="https://growmore.in/product-details/4/">-->
+                                        <!--        <p class="pl-20  pb-2" style=" background: #ffe3b4; font-weight:600; color:#000; font-family:auto;">Classic Men’s Leather Belt, Texas-Tan</p></a>-->
+                                        <!--</div>-->
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="row ">
+                               <div class="col-lg-12 pt-4">
+                                <div style="position: relative; display: inline-block;">
+                                    <img class="grid2_img2" src="{% static 'images/index/gil1.jpg' %}" width="100%">
+                                    <!--<div style="position: absolute; top: 96%; right: -10%; transform: translate(-50%, -50%);  padding: 10px;">-->
+                                    <!-- <h5 class="pl-20 pb-2">Our Premium Collection</h5>-->
+                                    <!--</div>-->
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+             
+     
+
+            <!-- Featured Porduct Section End Here -->
+            <!-- Begin New Product Section -->
+            
+            <!-- Begin Random Product Section -->
+            <section class="featured-pro random-pro random-pro-reverse pt-30 pb-60">
+                 <div class="container-fluid  pl-40 pr-40">
+                     <!-- Begin Random Product Title Area -->
+                     <div class="pos-title pos-title-2 mb-5">
+                         <h3>New Arrivals</h3>
+                     </div>
+                     <!-- Random Product Title Area End Here -->
+                     <!-- Begin Random Product Content Area -->
+                     <div class="row featured-pos-content featured-pos-content-2 mt-5">
+                         <div class="col-lg-12 p-0">
+                             <div class="pos-content">
+                                <div class="random-pro-active owl-carousel">
+                                    
+                                    <!-- Begin Single Random Product Area -->
+                                    {% for n in new_arrival_products  %}
+                                    <div class="single-product single-featured-pro-2">
+                                        <!-- Begin Product Image Area -->
+                                        <div class="product-img">
+                                             <a href="{% url 'product-details' n.id %}">
+                                                 <img class="primary-img" src="{{n.prod_image.url }}" alt="">
+                                                 <img class="secondary-img" src="{{n.prod_image_detail.url }}" alt="">
+                                                 <div class="sticker"><span>New</span></div>
+                                             </a>
+                                        </div>
+                                         <!-- Product Image Area End Here -->
+                                         <!-- Begin Product Content Area -->
+                                        <div class="product-contents">
+                                             <!-- Begin Product Name Area -->
+                                             <h5 class="product-name">
+                                                 <a href="{% url 'product-details' n.id %}" title="Printed Chiffon Dress">{{n.product_name}}</a>
+                                             </h5>
+                                             <!-- Product Name Area End Here -->
+                                             <!-- Begin Price Box Area -->
+                                             <div class="price-box">
+                                                 <span class="price">₹{{n.discounted_price}}</span>
+                                                 <span class="old-price">₹{{n.selling_price}}</span>
+                                             </div>
+                                             <!-- Price Box Area End Here -->
+                                        </div>
+                                        <!-- Product Content Area End Here -->
+                                    </div>
+                                    {% endfor %}
+                                    <!-- Single Random Product Area End Here -->                                    
+                                </div>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- Random Product Content Area End Here -->
+                 </div>
+            </section>
+            <!-- Random Product Section End Here -->
+         <!-- Begin Footer Area -->
+          <!-- Begin Footer Area -->
+        <div class="footer">
+            <!-- Begin Footer Full Area -->
+            <div class="footer-full">
+                <!-- Begin Footer Static Top Area -->
+                <div class="footer-static-top contact-us-footer-top">
+                    <div class="container-fluid pl-60 pr-60 pt-15">
+                        <div class="row">
+                            <!-- Begin Footer Bolck Area -->
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="footer-block first-child">
+                                    <h4>About Us</h4>
+                                    <p class="footer-desc">
+                                        GIL® is your go-to brand for leather belts, leather wallets, and other leather accessories.
+                                    </p>
+                                    <ul class="footer-contact">
+                                         <li class="address add"><i class="fa fa-map-marker "></i><a target="_blank" href="https://www.google.com/maps/search/D-5,+Site%201,%20,Panki%20Industrial%20Area,+Kanpur,+Uttar%20Pradesh,+208022+India">
+                                            D-5, Site 1,
+                                            Panki Industrial Area
+                                            Kanpur, Uttar Pradesh 208022
+                                            India</a></li>
+                                            <li class="phone add"><i class="fa fa-phone"></i><a href="tel://+91-512-2692444">
+                                            +91-512-2692444</a></li>
+                                        <li class="email add"><i class="fa fa-envelope-o"></i><a
+                                                href="mailto://info@leathergil.com">info@leathergil.com</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="amazon pt-3">
+                                    <p class="text-light">Also available on</p>
+                                    <ul>
+                                        <li><a href="https://www.amazon.in/stores/page/13B9F4D1-0DCA-4642-9EF8-EA645E47B75C?ingress=3" target="_blank"><span style="color:#ffda9a"><img src="{% static 'images/amazon.png' %}" height="50px" width="auto"/></span></a></li>
+                                        <li><a><span class="and_symbol" style="color:#ffda9a">&amp;</span></a></li>
+                     
+                                        <li><a href="https://www.flipkart.com/search?q=gil+belts&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&augment=false" target="_blank"><span style="color:#ffeb00"><img src="{% static 'images/flipkart.jpeg' %}" height="50px" width="auto"/></span></a></li>
+                                    </ul>
+                                </div>
+                                 
+                            </div>
+                            
+                            <!-- Footer Bolck Area End Here -->
+                            <!-- Begin Footer Bolck Area -->
+                            <div class="col-lg-3 col-md-5 col-sm-6">
+                                <div class="footer-block second-child">
+                                    
+                                    <h4>My Account</h4>
+                                     <ul>
+                                        {% if request.user.is_authenticated %}
+                                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                                            <li><a href="{% url 'profile' %}">My orders</a></li>
+                                            <!-- <li><a href="#">My credit slips</a></li> -->
+                                            <li><a href="{% url 'profile' %}">My addresses</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'accounts/login/' %}">Login</a></li>
+                                        {% endif %}
+                                         <li><a href="{% url 'shopping_cart' %}">Cart</a></li>
+                                     </ul>
+                                       
+                                    </ul>
+                                </div>
+                                <!-- Begin Social Block Area -->
+                                 <div class="social-block">
+                                    
+                                    <h4>Follow Us :</h4>
+                                    <ul>
+                                        <li class="facebook">
+                                            <a class="_blank" data-bs-toggle="tooltip" href="https://www.facebook.com/leathergilofficial"
+                                                title="Facebook" target="_blank">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="facebook">
+                                            <a class="_blank" data-bs-toggle="tooltip" href="https://www.instagram.com/leathergilofficial/"
+                                                title="Instagram" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li class="twetter">
+                                            <a class="_blank" data-bs-toggle="tooltip" href="https://twitter.com/growmoregil"
+                                                title="Twetter" target="_blank">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="rss">
+                                            <a class="_blank" data-bs-toggle="tooltip" href="https://www.linkedin.com/company/growmoregil "
+                                                title="LinkedIn" target="_blank">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                        <li class="youtube">
+                                            <a class="_blank" data-bs-toggle="tooltip" href="https://in.pinterest.com/Leather_GIL/"
+                                                title="Pinterest" target="_blank">
+                                                <i class="fa fa-pinterest"></i>
+                                            </a>
+                                        </li>
+                                        
+                                        {% comment %} <li class="google-plus">
+                                            <a class="_blank" data-bs-toggle="tooltip"
+                                                href="https://www.plus.google.com/discover" title="Google Plus"
+                                                target="_blank">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
+                                        </li> {% endcomment %}
+                                    </ul>
+                                </div>
+                                <!-- Social Block Area End Here -->
+                            </div>
+                            <!-- Footer Bolck Area End Here -->
+                            <!-- Begin Footer Bolck Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="footer-block">
+                                    <h4>Information</h4>
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="{% url 'about_us' %}">About us</a></li>
+                                        <li><a href="{% url 'product-belts' %}">All Leather Beltss</a></li>
+                                        <li><a href="{% url 'blog' %}">Our Blog</a></li>
+                                        <li><a href="{% url 'privacy_policy' %}" target="_blank">Privacy Policy</a></li> 
+                                        <li><a href="{% url 'contact-us' %}">Contact us</a></li>
+                                        <li><a href="{% url 'term_policy' %}" target="_blank">Terms & Conditions</a></li> 
+                                        <li><a href="{% url 'refund_policy' %}" target="_blank">Cancellation and Refund</a></li>
+                                        <li><a href="{% url 'shipping_policy' %}" target="_blank">Shipping & Delivery Policy</a></li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            <!-- Footer Bolck Area End Here -->
+                            <!-- Begin Footer Bolck Area -->
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="footer-block">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.1240443803194!2d80.2661585!3d26.4517302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c480ffb7975ab%3A0xd1ad4a554923290c!2sd%2C%20Industrial%20Area%2C%201%2C%20Vivekanand%20Nagar%2C%20Panki%2C%20Kanpur%2C%20Uttar%20Pradesh%20208022!5e0!3m2!1sen!2sin!4v1705295105650!5m2!1sen!2sin" style="width:100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                                
+                            </div>
+                       
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Static Top Area End Here -->
+                <!-- Begin Footer Static Bottom Area -->
+                <div class="footer-static-bottom contact-us-footer-bottom">
+                    <div class="container-fluid pl-60 pr-60">
+                        <div class="row">
+                            <!-- Begin Copyright Area -->
+                            <div class="col-lg-6 col-md-6 col-sm-12" style="margin:auto; text-align:center;">
+                                <div class="copyright">
+                                    <span>Copyright &copy; 2024 <a href="https://socialforyoou.in/" target="_blank">Social For Yoou</a> All rights reserved.</span>
+                                </div>
+                            </div>
+                            <!-- Copyright Area End Here -->
+                            <!-- Begin Footer Payment Area -->
+                            <!--<div class="col-lg-6 col-md-6 col-sm-12">-->
+                            <!--    <div class="payment f-right">-->
+                            <!--        <a href="#">-->
+                            <!--            <img src="images/payment/1.png" alt="">-->
+                            <!--        </a>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                            <!-- Footer Payment Area End Here -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Static Bottom Area End Here -->
+            </div>
+            <!-- Footer Full Area End Here -->
+        </div>
+        <!-- Footer Area End Here -->
+    </div>
+    <!-- Body Wrapper End Here -->
+    <!-- jQuery-V3.6.0 -->
+    <script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-migrate-3.3.2.min.js' %}"></script>
+    <!-- Ajax Mail js -->
+    <script src="{% static 'js/ajax-mail.js' %}"></script>
+    <!-- Meanmenu js -->
+    <script src="{% static 'js/jquery.meanmenu.min.js' %}"></script>
+    <!-- Wow.min js -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <!-- Slick Carousel js -->
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <!-- Nivo Slider js -->
+    <script src="{% static 'js/jquery.nivo.slider.js' %}"></script>
+    <!-- Owl Carousel-2 js -->
+    <!--<script src="{% static 'js/owl.carousel.min.js' %}"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Magnific popup js -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Isotope js -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <!-- Imagesloaded js -->
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- Mixitup js -->
+    <script src="{% static 'js/jquery.mixitup.min.js' %}"></script>
+    <!-- Countdown -->
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <!-- Counterup -->
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <!-- Waypoints -->
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <!-- Barrating -->
+    <script src="{% static 'js/jquery.barrating.min.js' %}"></script>
+    <!-- Jquery-ui -->
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <!-- Venobox -->
+    <script src="{% static 'js/venobox.min.js' %}"></script>
+    <!-- Nice Select js -->
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <!-- ScrollUp js -->
+    <script src="{% static 'js/scrollUp.min.js' %}"></script>
+    <!-- Main/Activator js -->
+    <script src="{% static 'js/main.js' %}"></script>
+   
+</body>
+
+  <script src="{% static 'newcss/js/plugins/jquery.min.js' %}"></script>
+  <script src="{% static 'newcss/js/plugins/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'newcss/js/plugins/bootstrap-slider.min.js' %}' %}"></script>
+  <!-- <script src="js/plugins/jquery.waypoints.min.js"></script> -->
+  <!-- <script src="js/plugins/sticky.min.js"></script> -->
+  <script src="{% static 'newcss/js/plugins/swiper.min.js' %}"></script>
+  <script src="{% static 'newcss/js/plugins/countdown.js' %}"></script>
+
+  <!-- Footer Scripts -->
+  <script src="{% static 'newcss/js/theme.js' %}"></script>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.querySelector(".play_video");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+<script>
+    let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlides() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+    
+    slideIndex++;
+    
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    
+    slides[slideIndex - 1].style.display = 'block';
+    
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
+showSlides();
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var video = document.getElementById('myVideo');
+
+        video.addEventListener('loadedmetadata', function() {
+            video.play().then(() => {
+                console.log('Video is playing');
+            }).catch((error) => {
+                console.error('Error playing the video:', error);
+            });
+        });
+    });
+</script>
+</html>

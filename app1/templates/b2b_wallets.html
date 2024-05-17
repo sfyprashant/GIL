@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+   
+    .img-zoom-container {
+      position: relative;
+      display: flex;
+    }
+    
+    .img-zoom-lens {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      /*set the size of the lens:*/
+      width: 40px;
+      height: 40px;
+     
+    }
+    
+    .img-zoom-result {
+      border: 1px solid #d4d4d4;
+      /*set the size of the result div:*/
+      width: 300px;
+      height: 300px;
+     margin-left: 30px;
+    }
+</style>
+<style>
+    /* Add this CSS in your style file or within a style tag in your HTML */
+    .modal-content {
+        width: 45rem;
+        background-color: white;
+        border: 1px solid white;
+        backdrop-filter: blur(10px);
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+        background-color: #cb9a00;
+        color: black;
+        padding: 15px;
+        text-align: center;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 15px;
+        border: 2px solid white;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .modal-header .close {
+        padding: 0;
+        background: white;
+        /* border: 1px solid #222; */
+        border-radius: 3px;
+        height: 30px;
+        width: 30px;
+        line-height: 28px;
+        display: block;
+        color: black;
+        text-shadow: 0 1px 0 #fff;
+        font-weight: 700;
+        font-size: 16px;
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+        top: 10px;
+        right: 10px;
+        z-index: 999;
+    }
+
+    .grid-view p {
+        color: black;
+        font-size: 16px;
+        line-height: 25px;
+        margin: 0 auto 25px;
+        max-width: 580px;
+    }
+
+    .imgae-style {
+        border: 2px solid #000000b0;
+        border-radius: 3px;
+    }
+
+</style>
+<!-- Begin Page Banner Area -->
+<div class="page-banner b2b-page-banner">
+    <div class="container">
+        <div class="page-banner-content">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="#">B2B</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Page Banner Area End Here -->
+<!-- Begin Shop Topbar Wrapper Area -->
+<div class="shop-topbar-area shop-topbar-area-reverse pt-100 ">
+    <div class="container">
+        <h3 class="text-center" style="font-family: auto;">Bespoke B2B Leather Solutions: GIL's Expertise in Wholesale
+            Customization</h3>
+        <!--<p>GIL stands out as a premier manufacturer of leather goods, focusing on providing tailored B2B solutions. Our extensive selection of top-notch leather items, such as wallets and belts, is available at competitive wholesale rates.-->
+        <!--           Collaborating with enterprises of various scales, we specialize in crafting personalized leather goods to address their unique requirements. Whether you seek a collection of branded leather wallets for your retail establishment or bespoke leather belts for your corporate executives, our expertise is at your service.</p>-->
+        <div class="row">
+            <div class="col-lg-3 order-1 order-lg-1">
+                <div class="shop-sidebar shop-sidebar-reverse mt-5">
+                    <!-- Shop Sidebar Area -->
+                    <div class="category">
+                        <h4>Categories</h4>
+                        <!-- Begin Category List Area -->
+                        <div class="category-list">
+                            <!-- Add data-category attribute to identify the category for each link -->
+                            <ul>
+
+                                <li>
+
+                                    <ul>
+                                        <li><a class="category"
+                                                href="{% url 'b2b-wallets' category='Purse' subcategory='Wallets' %}">Wallets</a>
+                                        </li>
+                                        <li><a class="category"
+                                                href="{% url 'b2b-wallets' category='Purse' subcategory='Accessories' %}">Accessories</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- Category List Area End Here -->
+                    </div>
+                    <!-- Shop Sidebar Area End-->
+                </div>
+
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="shop-product">
+
+                    <!-- Begin Tab Menu Content Area -->
+                    <div class="tab-content">
+                        <div id="grid" class="tab-pane show fade in active">
+                            <div class="grid-view">
+                                {% if products %}
+                                <div class="row">
+                                    {% for n in products %}
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <!-- Begin Single Product Area -->
+                                        <div class="single-product single-product-3 product-item belt">
+                                            <!-- Begin Product Image Area -->
+                                            <div class="product-img">
+                                                <a href="" data-toggle="modal" data-target="#productModal{{ n.id }}">
+                                                    <img class="primary-img" src="{{n.prod_image.url}}" alt="">
+                                                    <!--<img class="secondary-img" src="{{n.prod_image_detail.url}}" alt="">-->
+                                                </a>
+                                                <!-- Begin Product Action Area -->
+
+                                                <!-- Product Action Area End Here -->
+                                            </div>
+                                            <!-- Product Image Area End Here -->
+                                            <!-- Begin Product Content Area -->
+                                            <div class="product-contents">
+                                                <!-- Begin Product Name Area -->
+                                                <h5 class="product-name">
+                                                    <a href="" title="{{n.product_name}}"><b>{{n.product_name}}</b></a>
+                                                </h5>
+                                                <!-- Product Name Area End Here -->
+                                                <!-- Begin Rating Area -->
+                                                <!--<div class="rating">-->
+                                                <!--    <i class="fa-solid fa-star"></i>-->
+                                                <!--    <i class="fa-solid fa-star"></i>-->
+                                                <!--    <i class="fa-solid fa-star"></i>-->
+                                                <!--    <i class="fa-solid fa-star"></i>-->
+                                                <!--    <i class="fa-solid fa-star"></i>-->
+                                                <!--</div>-->
+                                                <!-- Rating Area End Here -->
+                                            </div>
+                                            <!-- Product Content Area End Here -->
+                                        </div>
+                                        <!-- Single Product Area End Here -->
+                                    </div>
+                                    <div class="modal fade" id="productModal{{ n.id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="productModalLabel{{ n.id }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 class="modal-title" id="productModalLabel{{ n.id }}">{{n.product_name}}</h6>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <!-- Left column for the image -->
+                                                        <div class="img-zoom-container">
+                                                            <img id="myimage{{ n.id }}" src="{{n.prod_image.url}}" width="300" height="240" onclick="imageClick('{{ n.id }}')">
+                                                            <div id="myresult{{ n.id }}" class="img-zoom-result"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-center">
+                                                    <a href="{% url 'contact-us' %}" class="form-button">Contact us</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="row">
+                                    <div class="col-5 mx-auto text-center">
+                                        <div class="alert alert-warning mt-3" role="alert" style="font-size: 18px; padding: 34px;">
+                                            This Categorie is currently not available.
+                                        </div>
+                                    </div>                                    
+                                </div>                                
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Shop Topbar  Wrapper Area End Here -->
+<!-- jQuery script -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initial product list
+        var allProducts = $(".single-product-3");
+
+        // Handle category link click
+        $(".product-category").on("click", function (e) {
+            e.preventDefault();
+
+            // Get the selected category
+            var category = $(this).data("category");
+
+            // Filter products based on the selected category
+            if (category === "all") {
+                allProducts.show();  // Show all products
+            } else {
+                allProducts.hide();  // Hide all products
+                $("." + category).show();  // Show products of the selected category
+            }
+        });
+    });
+</script>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<script>
+    $('.nav-item').on('click', function () {
+        const tabId = $(this).data('tab');
+        $('.tab-pane').removeClass('active');
+        $(`.tab-pane[data-tab="${tabId}"]`).addClass('active');
+    });
+</script>
+<!-- <script>
+    $(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 10000,
+            values: [0, 10000],
+            slide: function(event, ui) {
+                $("#min-price").val("₹" + ui.values[0]);
+                $("#max-price").val("₹" + ui.values[1]);
+            }
+        });
+        $("#min-price").val("₹" + $("#slider-range").slider("values", 0));
+        $("#max-price").val("₹" + $("#slider-range").slider("values", 1));
+    });
+    while (true) {
+        console.log("tum pagal ho");
+    }
+</script> -->
+<script>
+    function imageClick(id) {
+        var imgID = "myimage" + id;
+        var resultID = "myresult" + id;
+        console.log("myimage ",imgID)
+        console.log("myresult ",resultID)
+        imageZoom(imgID, resultID);
+    }
+
+    function imageZoom(imgID, resultID) {
+        var img = document.getElementById(imgID);
+        var result = document.getElementById(resultID);
+        var lens, cx, cy;
+
+        if (!img || !result) {
+            console.error("Image or result element not found");
+            return;
+        }
+
+        //create lens
+        lens = document.createElement("DIV");
+        lens.setAttribute("class", "img-zoom-lens");
+        
+        //insert lens
+        img.parentElement.insertBefore(lens, img);
+
+        //calculate the ratio between result DIV and lens
+        cx = result.offsetWidth / lens.offsetWidth;
+        cy = result.offsetHeight / lens.offsetHeight;
+
+        //set background properties for the result DIV
+        result.style.backgroundImage = "url('" + img.src + "')";
+        result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+
+        //execute a function when someone moves the cursor over the image, or the lens
+        lens.addEventListener("mousemove", moveLens);
+        img.addEventListener("mousemove", moveLens);
+        //and also for touch screens
+        lens.addEventListener("touchmove", moveLens);
+        img.addEventListener("touchmove", moveLens);
+
+        function moveLens(e) {
+            var pos, x, y;
+
+            //prevent any other actions that may occur when moving over the image
+            e.preventDefault();
+
+            //get the cursor's x and y positions
+            pos = getCursorPos(e);
+
+            //calculate the position of the lens
+            x = pos.x - (lens.offsetWidth / 2);
+            y = pos.y - (lens.offsetHeight / 2);
+
+            //prevent the lens from being positioned outside the image
+            if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+            if (x < 0) {x = 0;}
+            if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+            if (y < 0) {y = 0;}
+
+            //set the position of the lens
+            lens.style.left = x + "px";
+            lens.style.top = y + "px";
+
+            //display what the lens "sees"
+            result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+        }
+
+        function getCursorPos(e) {
+            var a, x = 0, y = 0;
+            e = e || window.event;
+
+            //get the x and y positions of the image
+            a = img.getBoundingClientRect();
+
+            //calculate the cursor's x and y coordinates, relative to the image
+            x = e.pageX - a.left;
+            y = e.pageY - a.top;
+
+            //consider any page scrolling
+            x = x - window.pageXOffset;
+            y = y - window.pageYOffset;
+
+            return {x : x, y : y};
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

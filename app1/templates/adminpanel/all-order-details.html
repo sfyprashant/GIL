@@ -1,0 +1,164 @@
+{% extends "adminpanel/admin-base.html" %}
+{% load static %}
+{% block content %}
+<style>
+	/* CSS for Django messages */
+	.alert {
+		padding: 10px;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		font-weight: bold;
+	}
+
+	/* Styles for different message types */
+	.alert-success {
+		background-color: #dff0d8;
+		border: 1px solid #d0e9c6;
+		color: #3c763d;
+	}
+
+	.alert-info {
+		background-color: #d9edf7;
+		border: 1px solid #bce8f1;
+		color: #31708f;
+	}
+
+	.alert-warning {
+		background-color: #fcf8e3;
+		border: 1px solid #faebcc;
+		color: #8a6d3b;
+	}
+
+	.alert-error {
+		background-color: #f2dede;
+		border: 1px solid #ebccd1;
+		color: #a94442;
+	}
+</style>
+
+
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+	<div class="content">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+		<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+			<div>
+				<h1>Product</h1>
+				<p class="breadcrumbs"><span><a href="{% url 'admin-dashboard' %}">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Order
+				</p>
+			</div>
+			<div>
+				<a href="{% url 'add-product' %}" class="btn btn-primary"> Add Porduct</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-7">
+				<div class="card card-default">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="responsive-data-table" class="table" style="width:100%">
+								<thead>
+									<tr>
+										<th>Product</th>
+										 <th>Name</th> 
+										<th>Price</th>
+										<th>Quantity</th>
+										<!-- <th>Customer Name </th> -->
+										<!-- <th>Country</th> -->
+										<!-- <th>locality</th> -->
+										<!-- <th>city</th>
+													<th>state</th>
+													<th>zipcode</th>
+													<th>Total Cost</th>
+													<th>Mobile No.</th> -->
+									</tr>
+								</thead>
+
+								<tbody>
+									{% for i in order_details %}
+									<tr>
+										<td><img class="tbl-thumb" height="auto" width="150px"
+												src="{{ i.product.prod_image.url }}" alt="Product Image" />
+											</td>
+											<td>{{ i.product.product_name }}</td>
+										<td>{{ i.product.discounted_price }}</td>
+										<td>{{ i.quantity }}</td>
+
+									</tr>
+									{% endfor %}
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{% for i in order_details %}
+			<div class="col-5">
+				<div class="card card-default">
+					<div class="card-body">
+					<h4>Summary</h4>
+					
+					<div class="card-details">
+						<p><strong>Order Id:</strong> {{ i.order.order_id }}</p>
+						<p><strong>Date:</strong> {{ i.order.date_added }}</p>
+						
+						<p><strong>Total Cost:</strong> {{ i.order.total_cost }}</p>
+						
+					</div>
+				</div>
+				</div>
+				<div class="card card-default">
+					<div class="card-body">
+					<h4>Shipping Address
+					</h4>
+					<div class="card-details">
+						<p> {{ i.order.locality }},{{ i.order.city }},{{ i.order.state }},
+							{{i.order.zipcode }},{{ i.order.country }}</p>
+
+					</div>
+				</div>
+				</div>
+				<div class="card card-default">
+					<div class="card-body">
+					<h4>Payment details
+					</h4>
+					<div class="card-details">
+						<table id="responsive-data-table" class="table" style="width:100%">
+							<thead>
+								<tr>
+									<th>Payment Id</th>
+									<th>Total Amount</th>
+									<th>Currency</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{ i.order.payment.razorpay_payment_id }}</td>
+									<td>{{ i.order.payment.amount }}</td>
+									<td>{{ i.order.payment.currency }}</td>
+									<td>{{ i.order.payment.status }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+			{% endfor %}
+		</div>
+	</div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
+
+
+{% endblock %}

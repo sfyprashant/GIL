@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{%load static}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed</title>
+    <!-- Add your CSS styles or include a stylesheet here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f8;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #e74c3c;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .back-to-home {
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Failed</h1>
+        <p>Oops! Something went wrong with your payment. Please try again.</p>
+        <!-- You can include additional information or instructions here -->
+
+        <a href="{% url 'checkout' %}" class="back-to-home">Back to Checkout</a>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+            <!-- Begin Page Banner Area -->
+            <div class="page-banner">
+                <div class="container">
+                    <div class="page-banner-content">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li class="active"><a href="error">Error 404</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Banner Area End Here -->
+            <!-- Begin 404 Error Page Area -->
+            <div class="error-404-page pt-100 pb-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="error-wrapper text-center">
+                                <div class="error-text">
+                                    <h1>404</h1>
+                                    <h2>Opps! PAGE NOT BE FOUND</h2>
+                                    <p>Sorry but the page you are looking for does not exist, have been removed, name changed or is temporarily unavailable.</p>
+                                </div>
+                                <div class="search-error">
+                                    <form action="#">
+                                        <input placeholder="Search" type="text">
+                                        <button><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="error-btn">
+                                    <a href="/">Back to home page</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 404 Error Page Area End Here -->
+          
+            {% endblock %}

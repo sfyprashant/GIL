@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .wishlistEmpty-container {
+    max-width: 980px;
+    margin: 130px auto 130px;
+    text-align: center;
+}
+.wishlistEmpty-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #282c3f;
+}
+.wishlistEmpty-info {
+    font-size: 18px;
+    color: #94989f;
+    max-width: 380px;
+    margin: 20px auto 0;
+}
+.wishlistEmpty-icon {
+    margin: 43px 0 50px;
+    display: inline-block;
+}
+</style>
+<!-- Begin Page Banner Area -->
+<div class="page-banner cart-page-banner">
+    <div class="container">
+        <div class="page-banner-content">
+            <!--<h2>GIL</h2>-->
+            <!--<ul>-->
+            <!--    <li><a href="/">Home</a></li>-->
+            <!--    <li><a href="{% url 'product' %}">Product</a></li>-->
+            <!--    <li class="active"><a href="#0">Shopping Cart</a></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+<!-- Page Banner Area End Here -->
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
+<!--Shopping Cart Area Strat-->
+<div class="Shopping-cart-area pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-content table-responsive">
+                    {% if cart_items %}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="raavin-product-remove">Remove</th>
+                                        <th class="raavin-product-thumbnail">Images</th>
+                                        <th class="cart-product-name">Product</th>
+                                        <th class="raavin-product-price">Unit Price</th>
+                                        <th class="raavin-product-quantity">Quantity</th>
+                                        <th class="raavin-product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                        {% for cart_item in cart_items %}
+                                        {% if cart_item.id %}
+                                        <tr>
+                                            <td class="raavin-product-remove">
+                                                <form action="{% url 'delete_cart_item' cart_item.product.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button class="delete-item-btn" data-cart-item-id="{{ cart_item.id }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td class="raavin-product-thumbnail">
+                                                <a href="#"><img height="100px" width="100px"
+                                                        src="{{ cart_item.product.prod_image.url }}" alt=""></a>
+                                            </td>
+                                            <td class="raavin-product-name">
+                                                <a href="#">{{cart_item.product.product_name}}</a>
+                                            </td>
+                                            <td class="raavin-product-price">
+                                                <span class="amount">₹{{ cart_item.product.discounted_price }}</span>
+                                            </td>
+                                            <td class="raavin-product-quantity">
+                                                <div class="quantity">
+                                                    <button class="quantity-btn" onclick="updateQuantity('{{ cart_item.id }}', 'decrease')">-</button>
+                                                    <input class="input-text qty text" step="1" min="1" max="200"
+                                                       name="quantity_{{ cart_item.id }}" value="{{ cart_item.quantity }}" title="Qty"
+                                                       size="4" type="text" data-cart-item-id="{{ cart_item.id }}" disabled>
+
+                                                           <!-- <p>{{ cart_item.id }}</p> -->
+                                                    <button class="quantity-btn" onclick="updateQuantity('{{ cart_item.id }}', 'increase')">+</button>
+                                                </div>
+                                                
+                                            </td>
+                                            <td class="product-subtotal">
+                                                <span class="amount">₹{{ cart_item.total_cost }}</span>
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        <tr>
+                                            <td class="raavin-product-remove">
+                                                <form action="{% url 'delete_cart_item' cart_item.product.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button class="delete-item-btn" data-cart-item-id="{{ cart_item.product.id }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td class="raavin-product-thumbnail">
+                                                <a href="#"><img height="100px" width="100px"
+                                                        src="{{ cart_item.product.prod_image.url }}" alt=""></a>
+                                            </td>
+                                            <td class="raavin-product-name">
+                                                <a href="#">{{cart_item.product.product_name}}</a>
+                                            </td>
+                                            <td class="raavin-product-price">
+                                                <span class="amount">₹{{ cart_item.product.discounted_price }}</span>
+                                            </td>
+                                            <td class="raavin-product-quantity">
+                                                <div class="quantity">
+                                                    <button class="quantity-btn" onclick="updateQuantity('{{ cart_item.product.id }}', 'decrease')">-</button>
+                                                    <input class="input-text qty text" step="1" min="1" max="200"
+                                                           name="quantity_{{ cart_item.product.id }}" value="{{ cart_item.quantity }}" title="Qty"
+                                                           size="4" type="text" data-cart-item-id="{{ cart_item.product.id }}">
+                                                    <button class="quantity-btn" onclick="updateQuantity('{{ cart_item.product.id }}', 'increase')">+</button>
+                                                </div>
+                                                
+                                            </td>
+                                            <td class="product-subtotal">
+                                                <span class="amount">₹{{ cart_item.total_cost }}</span>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<div class="row">-->
+                        <!--    <div class="col-12">-->
+                        <!--        <div class="coupon-all">-->
+                        <!--            <form action="#" method="post">-->
+                        <!--                {% csrf_token %}-->
+                        <!--                <div class="coupon">-->
+                        <!--                    <input id="coupon_code" class="input-text" name="coupon_code" value=""-->
+                        <!--                        placeholder="Coupon code" type="text">-->
+                        <!--                    <input class="button" name="apply_coupon" value="Apply coupon" type="submit"-->
+                        <!--                        onclick="applyCoupon()">-->
+                        <!--                </div>-->
+                        <!--            </form>-->
+                                    
+                        <!--        </div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+                        <form action="{% url 'checkout' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="cart-page-total">
+                                        <h2>Cart totals</h2>
+                                        <ul>
+                                            <li>Subtotal <span>₹{{ total_cost }}</span></li>
+                                            <li>Total <span>₹{{ total_cost }}</span></li>
+                                        </ul>
+                                        <button type="submit" class="form-button mt-3">Proceed to checkout</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    {% else %}
+                                <!--<p>Your Cart is empty. <a href="{% url 'product' %}">Browse our products</a> and add items to your wishlist.</p>-->
+                                <div><div class="wishlistEmpty-container">
+                            <div class="wishlistEmpty-heading">YOUR CART IS EMPTY</div>
+                            <div class="wishlistEmpty-info">Add items in your cart.<a href="{% url 'product' %}">Browse our products</a></div>
+                            <img src="{% static 'images/cart.png' %}">
+                            <div class="myntraweb-sprite wishlistEmpty-icon sprites-emptyIcon"></div><div><a class="form-button mt-2" href="{% url 'product' %}" class="wishlistEmpty-button">CONTINUE SHOPPING</a></div>
+                            </div>
+                            </div>
+                    {% endif %}
+                    </div>
+             
+        </div>
+    </div>
+</div>
+<!--Shopping Cart Area End-->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function updateQuantity(cartItemId, action) {
+        var quantityInput = $('input[name="quantity_' + cartItemId + '"]');
+        var currentQuantity = parseInt(quantityInput.val());
+
+        if (action === 'increase') {
+            quantityInput.val(currentQuantity + 1);
+        } else if (action === 'decrease' && currentQuantity > 1) {
+            quantityInput.val(currentQuantity - 1);
+        }
+
+        // Send an asynchronous request to update the cart quantity
+        var newQuantity = parseInt(quantityInput.val());
+
+        console.log(cartItemId)
+        console.log(newQuantity)
+        $.ajax({
+            url: `/update-cart/${cartItemId}/${newQuantity}/`,
+            type: 'GET',
+            success: function(data) {
+                console.log(data.message);
+                window.location.reload();
+            },
+            error: function(error) {
+                console.log('Error updating cart quantity:', error);
+            }
+        });
+    }
+
+   
+</script>
+
+{% endblock %}

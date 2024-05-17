@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- Begin Page Banner Area -->
+<div class="page-banner product-detail-banner">
+    <div class="container">
+        <div class="page-banner-content ">
+            <!--<h2>GIL</h2>-->
+            <!--<ul>-->
+            <!--    <li><a href="/">Home</a></li>-->
+            <!--    <li><a href="shop-left-sidebar">Shop</a></li>-->
+            <!--    <li class="active"><a href="#0">Checkout</a></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+<!-- Page Banner Area End Here -->
+<!--Checkout Area Strat-->
+<div class="checkout-area pt-100 pb-70">
+    <div class="container">
+        
+
+    <form action="{% url 'place_order' %}" method="POST" >
+        {% csrf_token %}
+        <div class="row">
+            
+                <div class="col-lg-6 col-12">
+                    
+                        <div class="checkbox-form">
+
+                            <h3>Billing Details</h3>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="country-select clearfix">
+                                        <label>Country <span class="required">*</span></label>
+                                        <input type="text" value="India" name="country" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label> Name <span class="required">*</span></label>
+                                        <input placeholder="" value="{{ billing_info.name }}" type="text" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="country-select clearfix">
+                                        <label>Gender <span class="required">*</span></label>
+                                        <select class="nice-select wide" name="gender">
+                                            <option {% if billing_info.gender == 'female' %} selected {% endif %} data-display="female">Female</option>
+                                            <option {% if billing_info.gender == 'male' %} selected {% endif %} value="male">Male</option>
+                                            <option {% if billing_info.gender == 'other' %} selected {% endif %} value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Mobile Number <span class="required">*</span></label>
+                                        <input type="text" name="mobile_no" value="{{ billing_info.mobile_no }}" inputmode="numeric"  required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Address <span class="required">*</span></label>
+                                        <input placeholder="Street address" type="text" name="locality" value="{{ billing_info.locality }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Town / City <span class="required">*</span></label>
+                                        <input type="text" name="city" value="{{ billing_info.city }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="country-select clearfix">
+                                        <label for="id_state">Select State <span class="required">*</span></label>
+                                        <select class="nice-select wide" id="id_state" name="state">
+                                            <option value="andhrapradesh" {% if billing_info.state == 'andhrapradesh' %} selected {% endif %}>Andhra Pradesh</option>
+                                            <option value="ap" {% if billing_info.state == 'ap' %} selected {% endif %}>Arunachal Pradesh</option>
+                                            <option value="goa" {% if billing_info.state == 'goa' %} selected {% endif %}>Goa</option>
+                                            <option value="haryana" {% if billing_info.state == 'haryana' %} selected {% endif %}>Haryana</option>
+                                            <option value="jharkhand" {% if billing_info.state == 'jharkhand' %} selected {% endif %}>Jharkhand</option>
+                                            <option value="up" {% if billing_info.state == 'up' %} selected {% endif %}>Uttar Pradesh</option>
+                                            {% comment %} {% for state_option in STATE_CHOICES %}
+                                            <option value="{{ state_option.0 }}">{{ state_option.1 }}</option>
+                                            {% endfor %} {% endcomment %}
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="checkout-form-list">
+                                        <label>Postcode / Zip <span class="required">*</span></label>
+                                        <input placeholder="" type="text" name="zipcode"  inputmode="numeric" value="{{ billing_info.zipcode }}" required>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6">
+                                    <div class="checkout-form-list">
+                                        <label>Phone <span class="required">*</span></label>
+                                        <input type="text" name="mobile_no">
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-md-12">
+                                    <div class="checkout-form-list create-acc">
+                                        <input id="ckbox" type="checkbox" name="checkbox">
+                                        <label>Create an account?</label>
+                                    </div>
+                                    <div id="cbox-info" class="checkout-form-list create-account">
+                                        <p>Create an account by entering the information below. If you are a returning
+                                            customer please login at the top of the page.</p>
+                                        <label>Account password <span class="required">*</span></label>
+                                        <input placeholder="password" type="password" name="password">
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="different-address">
+                                <div class="ship-different-title">
+                                    <h3>
+                                        <label>Ship to a different address?</label>
+                                        <input id="ship-box" type="checkbox" name="ship_box">
+                                    </h3>
+                                </div>
+                                <div id="ship-box-info" class="row">
+                                    <div class="col-md-12">
+                                        <div class="country-select clearfix">
+                                            <label>Country <span class="required">*</span></label>
+
+                                            <input type="text" class="nice-select wide " value="India"  name="ship_country">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Name <span class="required">*</span></label>
+                                            <input placeholder="" type="text" name="ship_name" value="{{ shipping_info.ship_name }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="country-select clearfix">
+                                            <label>Gender <span class="required">*</span></label>
+                                            <select class="nice-select wide" name="ship_gender" >
+                                                <option {% if shipping_info.ship_gender == 'female' %} selected {% endif %} data-display="female">Female</option>
+                                                <option {% if shipping_info.ship_gender == 'male' %} selected {% endif %} value="male">Male</option>
+                                                <option {% if shipping_info.ship_gender == 'other' %} selected {% endif %} value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Address <span class="required">*</span></label>
+                                            <input placeholder="Street address" type="text" name="ship_address" value="{{ shipping_info.ship_address }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Town / City <span class="required">*</span></label>
+                                            <input type="text" name="ship_town" value="{{ shipping_info.ship_town }}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <div class="country-select clearfix">
+                                            <label for="id_state">Select State <span class="required">*</span></label>
+                                            <select class="nice-select wide" id="id_state" name="ship_state">
+                                                <option value="andhrapradesh" {% if shipping_info.ship_state == 'andhrapradesh' %} selected {% endif %}>Andhra Pradesh</option>
+                                                <option value="ap" {% if shipping_info.ship_state == 'ap' %} selected {% endif %}>Arunachal Pradesh</option>
+                                                <option value="goa" {% if shipping_info.ship_state == 'goa' %} selected {% endif %}>Goa</option>
+                                                <option value="haryana" {% if shipping_info.ship_state == 'haryana' %} selected {% endif %}>Haryana</option>
+                                                <option value="jharkhand" {% if shipping_info.ship_state == 'jharkhand' %} selected {% endif %}>Jharkhand</option>
+                                                <option value="up" {% if shipping_info.ship_state == 'up' %} selected {% endif %}>Uttar Pradesh</option>
+                                                {% comment %} {% for state_option in STATE_CHOICES %}
+                                                <option value="{{ state_option.0 }}">{{ state_option.1 }}</option>
+                                                {% endfor %} {% endcomment %}
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Postcode / Zip <span class="required">*</span></label>
+                                            <input placeholder="" type="text" name="ship_zip "  inputmode="numeric" value="{{ shipping_info.ship_zip }}">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Phone <span class="required">*</span></label>
+                                            <input type="text" name="ship_mobile_no"  value="{{ shipping_info.ship_mobile_no }}">
+                                            <input type="hidden" name="order_id"  inputmode="numeric"  value="{{razorpay_order_id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-notes">
+                                    <div class="checkout-form-list">
+                                        <label>Order Notes</label>
+                                        <textarea id="checkout-mess" cols="30" rows="10"
+                                            placeholder="Notes about your order, e.g. special notes for delivery."
+                                            name="order_notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                
+                </div>
+                <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>Your order</h3>
+                            <div class="your-order-table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="cart-product-name">Product</th>
+                                            <th class="cart-product-total">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cart_item in cart_items %}
+                                        <tr class="cart_item">
+                                            <td class="cart-product-name" name="product">
+                                                {{ cart_item.product.product_name }}<strong
+                                                    class="product-quantity"> *{{ cart_item.quantity }}</strong></td>
+                                                    <input type="hidden" name="id_cart" value="{{ cart_item.product.id }}">
+                                                    <input type="hidden" name="product_name" value="{{ cart_item.product.product_name }}">
+                                                    <input type="hidden" name="quantity" value="{{ cart_item.quantity }}">
+                                            <!-- <td class="cart-product-total"><span class="amount">₹{{ cart_item.total_cost }}</span></td> -->
+                                            <td class="cart-product-total">
+                                                <span class="amount">₹{{ cart_item.total_cost }}</span>
+                                                <!-- Hidden input fields for quantity and total_cost -->
+                                                <input type="hidden" name="quantity" value="{{ cart_item.quantity }}">
+                                                <input type="hidden" name="amount" value="{{ cart_item.total_cost }}">
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+
+                                        <tr class="cart-subtotal">
+                                            <th>Cart Subtotal</th>
+                                            <td><span class="amount">₹{{ total_cost }}</span></td>
+                                            <input type="hidden" name="total_cost" value="{{ total_cost }}">
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Order Total</th>
+                                            {% comment %} <td><strong><span class="amount">₹{{ total_cost }}</span></strong></td> {% endcomment %}
+                                            <b><td><strong><input type="text" style="text-align:center;" name="amount" class="amount" value="₹{{ total_cost }}" disabled></strong></td></b>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-accordion">
+                                    <div id="accordion">
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-1">
+                                                <h5 class="panel-title">
+                                                    <a class="" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                        Direct Bank Transfer.
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>Make your payment directly into our bank account. Please use your
+                                                        Order ID as the payment reference. Your order won’t be shipped until
+                                                        the funds have cleared in our account.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-2">
+                                                <h5 class="panel-title">
+                                                    <a class="collapsed" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseTwo" aria-expanded="false"
+                                                        aria-controls="collapseTwo">
+                                                        Cheque Payment
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>Make your payment directly into our bank account. Please use your
+                                                        Order ID as the payment reference. Your order won’t be shipped until
+                                                        the funds have cleared in our account.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-3">
+                                                <h5 class="panel-title">
+                                                    <a class="collapsed" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                                        aria-controls="collapseThree" href="#">
+                                                        Razorpay
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                          
+                                            <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>Make your payment directly into our bank account. Please use your
+                                                        Order ID as the payment reference. Your order won’t be shipped until
+                                                        the funds have cleared in our account.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order-button-payment">
+                                        <input id="pay-btn" type="submit" name="place_order" value="Place Order">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                    
+                </div>
+            
+
+        </div>
+    </form>
+
+    </div>
+</div>
+<!--Checkout Area End-->
+
+  <!-- Razorpay's Javascript code. -->
+
+
+
+{% endblock %}

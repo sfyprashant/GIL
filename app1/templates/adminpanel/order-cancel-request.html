@@ -1,0 +1,127 @@
+{% extends 'adminpanel/admin-base.html' %}
+{% load static %}
+{% block content %}
+{% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+<style>
+	/* Define styles for each order status */
+.status-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-Pending {
+    background-color: #ffc107; /* Yellow */
+    color: #000; /* Black */
+}
+
+.status-Processing {
+    background-color: #17a2b8; /* Dark cyan */
+    color: #fff; /* White */
+}
+
+.status-Accept {
+    background-color: #28a745; /* Green */
+    color: #fff; /* White */
+}
+
+.status-Delivered {
+    background-color: #007bff; /* Blue */
+    color: #fff; /* White */
+}
+
+.status-Reject {
+    background-color: #dc3545; /* Red */
+    color: #fff; /* White */
+}
+
+</style>	
+
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+						<h1>New Orders</h1>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>Orders
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table" style="width:100%">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Item</th>
+													<th>Name</th>
+													<th>Customer</th>
+													<th>Items</th>
+													<th>Price</th>
+													<th>Status</th>
+													<th>Status Update</th>
+													<th>Date</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												{% for i in order %}
+												<tr>
+													<td>{{ i.order.id }}</td>
+													<td><img class="product-img tbl-img" src="{{ i.order.product.prod_image }}" alt="product"></td>
+													<td>{{ i.old_cart.product.product_name }}</td>
+													<td><strong>{{ i.order.name }}</strong><br>
+														{{ i.order.username }}
+													</td>
+													<td>{{ i.old_cart.quantity }}</td>
+													<td>{{ i.old_cart.total_cost }}</td>
+													<td><span class="status-label status-{{ i.status }}">{{ i.cancel_check }}</span></td>
+													<td>
+														<input type="hidden" class="orderId" id="orderId{{ i.id }}" value="{{ i.id }}">
+														<select class="form-control newStatus" id="newStatus{{ i.id }}" onChange="changeOrderStatus({{ i.id }})" name="new_status">
+															<option value=" ">Select Status</option>
+															<option value="Pending">Pending</option>
+															<option value="Reject">Reject</option>
+															<option value="Accept">Accept</option>
+															
+														</select>
+													</td>
+													<td>{{ i.order.date_added }}</td>
+													<!--<td>-->
+													<!--	<div class="btn-group mb-1">-->
+													<!--		<button type="button"-->
+													<!--			class="btn btn-outline-success">Info</button>-->
+													<!--		<button type="button"-->
+													<!--			class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"-->
+													<!--			data-bs-toggle="dropdown" aria-haspopup="true"-->
+													<!--			aria-expanded="false" data-display="static">-->
+													<!--			<span class="sr-only">Info</span>-->
+													<!--		</button>-->
+
+													<!--		<div class="dropdown-menu">-->
+													<!--			<a class="dropdown-item" href="{% url 'update-order' i.id %}">Update</a>-->
+													<!--			<a class="dropdown-item" href="">Delete</a>-->
+													<!--		</div>-->
+													<!--	</div>-->
+													<!--</td>-->
+												</tr>
+												{% endfor %}
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+
+{% endblock %}

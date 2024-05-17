@@ -1,0 +1,65 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	
+<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>GIL Admin Panel</title>
+		
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com/">
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+		<link href="../../../../../cdn.jsdelivr.net/npm/%40mdi/font%404.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+		
+		<!-- Ekka CSS -->
+		<link id="ekka-css" rel="stylesheet" href="{% static 'admin/assets/css/ekka.css' %}" />
+		
+		<!-- FAVICON -->
+		<link href="assets/img/favicon.png" rel="shortcut icon" />
+	</head>
+	{% block content %}  {% endblock %}
+
+    	
+		<!-- Javascript -->
+		<script src="{% static 'admin/assets/plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+		<script src="{% static 'admin/assets/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'admin/assets/plugins/jquery-zoom/jquery.zoom.min.js' %}"></script>
+		<script src="{% static 'admin/assets/plugins/slick/slick.min.js' %}"></script>
+			<!-- Common Javascript -->
+	<script src="{% static 'admin/assets/plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+	<script src="{% static 'admin/assets/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'admin/assets/plugins/simplebar/simplebar.min.js' %}"></script>
+	<script src="{% static 'admin/assets/plugins/jquery-zoom/jquery.zoom.min.js' %}"></script>
+	<script src="{% static 'admin/assets/plugins/slick/slick.min.js' %}"></script>
+
+	<!-- Chart -->
+	<script src="{% static 'admin/assets/plugins/charts/Chart.min.js' %}"></script>
+	<script src="{% static 'admin/assets/js/chart.js' %}"></script>
+
+	<!-- Google map chart -->
+	<script src="{% static 'admin/assets/plugins/charts/google-map-loader.js' %}"></script>
+	<script src="{% static 'admin/assets/plugins/charts/google-map.js' %}"></script>
+
+	<!-- Date Range Picker -->
+	<script src="{% static 'admin/assets/plugins/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/daterangepicker/daterangepicker.js' %}"></script>
+	<script src="{% static 'admin/assets/js/date-range.js' %}"></script>
+
+	<!-- Option Switcher -->
+	<script src="{% static 'admin/assets/plugins/options-sidebar/optionswitcher.js' %}"></script>
+
+	<!-- Ekka Custom -->
+	<script src="{% static 'admin/assets/js/ekka.js' %}"></script>
+	
+		<!-- Ekka Custom -->	
+		<script src="{% static 'admin/assets/js/ekka.js' %}"></script>
+	</body>
+
+</html>

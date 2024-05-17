@@ -1,0 +1,468 @@
+{% extends "adminpanel/admin-base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+       .rb-box {
+        width: 80%;
+        /max-width: 420px;/
+        /margin: 50px auto;/
+        /padding: 1.3em;/
+        /background: #292942;/
+        /border-radius: 0.75em;/
+        -webkit-filter: drop-shadow(1px 2px 5px rgba(0, 0, 0, .3));
+        /filter: drop-shadow(1px 2px 5px rgba(0, 0, 0, .3));/
+        /box-shadow: 0 2px 2px rgba(243, 49, 128, .5), 0 0px 5px rgba(243, 49, 128, .15), 0 0px 4px rgba(0, 0, 0, .35), 0 5px 20px rgba(243, 49, 128, .25), 0 15px 50px rgba(243, 49, 128, .75), inset 0 0 15px rgba(255, 255, 255, .05);/
+       }
+
+        .rb {
+            /padding: 16px 0;/
+            /text-align: center;/
+            background: rgba(255, 255, 255, .03);
+            border-radius: .3em;
+        }
+
+        .rb-tab {
+            display: inline-block;
+            position: relative;
+            width: 13%;
+            padding: 0px 0 5px 0;
+        }
+        .rb-tab p
+        {
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .rb-txt {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: #292626;
+        }
+
+
+        .rb-spot {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            /border: 2px solid rgb(61 57 57 / 69%);/
+            /border-radius: 100%;/
+            cursor: pointer;
+            transition: ease .5s;
+        }
+
+        .rb-tab input[type="radio"] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            opacity: 0;
+            z-index: 1;
+            /* Ensure radio button is clickable */
+        }
+
+        .rb-tab-active .rb-spot {
+        background: rgb(247 230 204);
+        border: 2px solid rgb(191 111 58);
+        display: block;
+        width: 40px;
+        height: 40px;
+        /border-radius: 100%;/
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        }
+
+</style>
+<style>
+	/* CSS for Django messages */
+	.alert {
+		padding: 10px;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		font-weight: bold;
+	}
+
+	/* Styles for different message types */
+	.alert-success {
+		background-color: #dff0d8;
+		border: 1px solid #d0e9c6;
+		color: #3c763d;
+	}
+
+	.alert-info {
+		background-color: #d9edf7;
+		border: 1px solid #bce8f1;
+		color: #31708f;
+	}
+
+	.alert-warning {
+		background-color: #fcf8e3;
+		border: 1px solid #faebcc;
+		color: #8a6d3b;
+	}
+
+	.alert-error {
+		background-color: #f2dede;
+		border: 1px solid #ebccd1;
+		color: #a94442;
+	}
+	/* Custom CSS for inline checkboxes */
+	.rb-tab {
+		display: inline;
+		margin-right: 10px;
+	}
+
+	/* Styling for the checkboxes */
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	input[type="checkbox"] + .rb-spot {
+		border: 1px solid #69570e;
+		border-radius: 3px;
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		position: relative;
+		cursor: pointer;
+	}
+
+	input[type="checkbox"]:checked + .rb-spot {
+		background-color: rgb(191 111 58);
+		border: 2px solid rgb(191 111 58);
+	}
+
+	input[type="checkbox"] + .rb-spot .rb-txt {
+		/* display: none; */
+		color: #000;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	input[type="checkbox"]:checked + .rb-spot .rb-txt {
+		display: inline-block;
+	}
+
+</style>
+
+
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+	<div class="content">
+		<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+			<div>
+				<h1>Add Product</h1>
+				<p class="breadcrumbs"><span><a href="{% url 'admin-dashboard' %}">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Product
+				</p>
+			</div>
+			<div>
+				<a href="{% url 'product-list' %}" class="btn btn-primary"> View All
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card card-default">
+					<div class="card-header card-header-border-bottom">
+						<h2>Add Product</h2>
+					</div>
+
+					<div class="card-body">
+						<div class="row ec-vendor-uploads">
+							<div class="col-lg-12">
+								{% if messages %}
+								{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+								{% endfor %}
+								{% endif %}
+
+								<div class="ec-vendor-upload-detail">
+									<form class="row g-3 form needs-validation" method="post" enctype='multipart/form-data'
+										action="{% url 'save-product' %}">
+										{% csrf_token %}
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Product name</label>
+											<input type="text" name="product_name" class="form-control slug-title"
+												id="inputEmail4" required>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										<div class="col-md-6">
+											<label class="form-label">Select Categories</label>
+											<select id="category-select-new" name="categories" class="form-select" required>
+												<option value="0">Select Option</option>
+												<option value="Purse">Wallets and Accessories</option>
+												<option value="Belt">Belt</option>
+												<option value="Combo">Combo</option>
+											</select>
+											<div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+										</div>
+
+										<div class="col-md-6">
+											<label class="form-label">Select Subcategories</label>
+											<select id="subcategory-select" name="subcategories" class="form-select" required>
+												<option value="0">Select Option</option>
+											</select>
+											<div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Brand</label>
+											<input type="text" name="barnd" class="form-control slug-title"
+												id="inputEmail4" required>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										<div class="col-md-12">
+											<label class="form-label">Description</label>
+											<textarea class="form-control" rows="4" name="description"></textarea>
+											<div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+										</div>
+										<div class="col-md-12">
+											<label class="form-label">Product Image </label>
+											<input type='file' name="img1" id="thumbUpload06" class="ec-image-upload"
+												accept=".png, .jpg, .jpeg" required/>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										
+										<div class="col-md-12">
+											<label class="form-label">Secend Product Image </label>
+											<input type='file' name="img2" id="thumbUpload06" class="ec-image-upload"
+												accept=".png, .jpg, .jpeg" required/>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										<div class="col-md-12">
+											<label class="form-label">Product Image Details</label>
+											<input type='file' name="imgdec" id="thumbUpload06" class="ec-image-upload"
+												accept=".png, .jpg, .jpeg" required/>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										<div class="col-md-8">
+											<div class="rb-box">
+												<!-- Radio Button Module -->
+												<div id="rb-1" class="rb">
+													<label class="rb-tab">
+														<p>Size:</p>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size34" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">34</span>
+														</span>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size36" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">36</span>
+														</span>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size38" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">38</span>
+														</span>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size40" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">40</span>
+														</span>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size42" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">42</span>
+														</span>
+													</label>
+													<label class="rb-tab rb-tab-active">
+														<input type="checkbox" name="size44" value="False">
+														<span class="rb-spot">
+															<span class="rb-txt">44</span>
+														</span>
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label class="form-label">Selling Price </label>
+											<input type="number" name="selling_price" class="form-control" id="price1" required>
+											<div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+										</div>
+										<div class="col-md-6">
+											<label class="form-label">Discounted Price </label>
+											<input type="number" name="discounted_price" class="form-control"
+												id="price1" required>
+												<div class="invalid-feedback">
+                                                    Please select a category.
+                                                </div>
+										</div>
+										<!--<div class="col-md-6">-->
+										<!--	<label class="form-label">Quantity</label>-->
+										<!--	<input type="number" name="quantity" class="form-control" id="quantity1">-->
+										<!--</div>-->
+										<div class="col-md-6">
+											<label class="form-label">Availability</label>
+											<select name="availability" id="Categoriesaa" class="form-select" required>
+												<option value="0">Select Option</option>
+												<option value="In Stock">Yes</option>
+												<option value="Not Available In Stock">No</option>
+											</select>
+											<div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+										</div>
+											<div class="col-md-6">
+											<label class="form-label">Add B2B PAGE</label>
+											<select name="B2B" id="Categories" class="form-select" required>
+												<option value="0">Select Option</option>
+												<option value="True">Yes</option>
+												<option value="False">No</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<label for="Sub_Categories" class="col-12 col-form-label">Condition</label>
+											<div class="col-6">
+												<input id="Sub_Categories" name="condition"
+													class="form-control here set-slug" type="text" required>
+													<div class="invalid-feedback">
+                                                        Please select a category.
+                                                    </div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label class="form-label">Rating </label>
+											<!--<input type='text' name="ratingimg" id="thumbUpload06"-->
+											<!--			class="ec-image-upload"-->
+											<!--			accept=".png, .jpg, .jpeg" />-->
+											<select name="ratingimg" id="Categoriehhhs" class="form-select">
+												<option value="0">Select Option</option>
+												<option value="0">0</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<label class="form-label">Product Tags </label>
+											<input type='file' name="tagimg" id="thumbUpload06" class="ec-image-upload"
+												accept=".png, .jpg, .jpeg" required/>
+										</div>
+										<div class="col-md-12">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
+
+<!-- Footer -->
+<script>
+	// JavaScript
+	document.getElementById('category-select-new').addEventListener('change', function () {
+		const category = this.value;
+		const subcategorySelect = document.getElementById('subcategory-select');
+
+		// Clear existing options
+		subcategorySelect.innerHTML = '<option value="0">Select Option</option>';
+
+		// Add new options based on selected category
+		if (category === 'Belt') {
+			subcategorySelect.innerHTML += `
+                <option value="Signature Belts">Signature Belts</option>
+                <option value="Reversible Belts">Reversible Belts</option>
+                <option value="Casual Belts">Casual Belts</option>
+                <option value="Formal Belts">Formal Belts</option>
+                <option value="Semi Formal Belts">Semi Formal Belts</option>
+                <option value="Braided/Ladies Belt">Braided/Ladies Belt</option>
+            `;
+		} else if (category === 'Purse') {
+			subcategorySelect.innerHTML += `
+                <option value="Wallets">Wallets</option>
+                <option value="Accessories">Accessories</option>
+            `;
+		} else if (category === 'Combo') {
+			subcategorySelect.innerHTML += `
+                <option value="Corporate Gifts">Corporate Gifts</option>
+            `;
+		}
+	});
+</script>
+<script>
+	// Get all checkboxes
+	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+
+
+	// Add event listener to toggle value
+	checkboxes.forEach(checkbox => {
+		checkbox.addEventListener('change', function () {
+			if (this.checked) {
+				this.value = 'True';
+			} else {
+				this.value = 'False';
+			}
+		});
+	});
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}

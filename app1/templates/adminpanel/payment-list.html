@@ -1,0 +1,97 @@
+{% extends 'adminpanel/admin-base.html' %}
+{% load static %}
+{% block content %}
+{% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+<style>
+	/* Define styles for each order status */
+.status-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-Pending {
+    background-color: #ffc107; /* Yellow */
+    color: #000; /* Black */
+}
+
+.status-Processing {
+    background-color: #17a2b8; /* Dark cyan */
+    color: #fff; /* White */
+}
+
+.status-Shipped {
+    background-color: #28a745; /* Green */
+    color: #fff; /* White */
+}
+
+.status-Delivered {
+    background-color: #007bff; /* Blue */
+    color: #fff; /* White */
+}
+
+.status-Canceled {
+    background-color: #dc3545; /* Red */
+    color: #fff; /* White */
+}
+.btn-ps{
+    padding: 9px 20px;
+    background: #88aaf3;
+    color: black;
+    border-radius: 9px;
+    cursor: pointer;
+}
+.btn-ps :hover {
+    background: radial-gradient(#197481, #24c4da);
+    color:black;
+}
+</style>	
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+						<h1>New Orders</h1>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>Orders
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table" style="width:100%">
+											<thead>
+												<tr>
+													<th>Payment ID</th>
+													<th>Total Amount</th>
+													<th>Currency</th>
+													<th>Status</th>
+													<th>View Order</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												{% for i in payment %}
+												<tr>
+                                                    <td>{{ i.razorpay_payment_id }}</td>
+                                                    <td>{{ i.amount }}</td>
+                                                    <td>{{ i.currency }}</td>
+                                                    <td>{{ i.status }}</td>
+                                                    <td><a class="btn-ps" href="{% url 'payment-order' pk=i.id %}">View</a></td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+
+	
+{% endblock %}

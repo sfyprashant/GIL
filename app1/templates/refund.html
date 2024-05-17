@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .policy li
+    {
+        list-style-type:disc;
+    }
+</style>
+<div class="checkout-area pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <ul>
+                    <li><a href="{% url 'term_policy' %}"><p>Terms &amp; Conditions</p></a></li>
+                    <li><a href="#"><p>Cancellation and Refund Policy</p></a></li>
+                    <li><a href="{% url 'privacy_policy' %}"><p>Privacy Policy</p></a></li>
+                    <li><a href="{% url 'shipping_policy' %}"><p>Shipping and Delivery Policy</p></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-8">
+                <h4>Cancellation &amp; Refund Policy</h4>
+                <h6>GOWMORE INTERNATIONAL LIMITED believes in helping its customers as far as possible, and has therefore a liberal cancellation policy. Under this policy:</h6>
+                <ul class="policy">
+                    <li class="mt-3">Cancellations will be considered only if the request is made within 15 days of placing the order. However, the cancellation request may not be entertained if the orders have been communicated to the vendors/merchants and they have initiated the process of shipping them.</li>
+                    <li class="mt-3">GOWMORE INTERNATIONAL LIMITED does not accept cancellation requests for perishable items like flowers, eatables etc. However, refund/replacement can be made if the customer establishes that the quality of product delivered is not good.</li>
+                    <li class="mt-3">In case of receipt of damaged or defective items please report the same to our Customer Service team. The request will, however, be entertained once the merchant has checked and determined the same at his own end. This should be reported within 15 days of receipt of the products.</li>
+                    <li class="mt-3">In case you feel that the product received is not as shown on the site or as per your expectations, you must bring it to the notice of our customer service within 15 days of receiving the product. The Customer Service Team after looking into your complaint will take an appropriate decision.</li>
+                    <li class="mt-3">In case of complaints regarding products that come with a warranty from manufacturers, please refer the issue to them.</li>
+                    <li class="mt-3">In case of any Refunds approved by the GOWMORE INTERNATIONAL LIMITED, it’ll take 6-8 days for the refund to be processed to the end customer.</li>
+                </ul>
+                <br>
+                <p><u class="text-black">Disclaimer</u>: The above content is created at GOWMORE INTERNATIONAL LIMITED sole discretion. Razorpay shall not be liable for any content provided here and shall not be responsible for any claims and liability that may arise due to merchant’s non-adherence to it.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
